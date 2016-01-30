@@ -50,11 +50,6 @@ std::vector<Operator*> EightPuzzle::EightPuzzleState::getAllowedOperators()
         break;
     }
 
-    for (Operator* var : operatorAllowed) {
-        std::cout << "|" << ((EightPuzzleOperator*)var)->getOperatorValue() << "|";
-    }
-    std::cout << std::endl;
-
     return operatorAllowed;
 }
 
