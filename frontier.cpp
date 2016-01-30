@@ -1,18 +1,19 @@
 #include "frontier.h"
 
-AI_Search::Frontier::Frontier(State* initialState)
+AI_Search::Frontier::Frontier(State* initialState, std::function<bool(State*, State*)> sortAlgorithm)
 {
     _states.push_back(initialState);
+    _sortAlgorithm = sortAlgorithm;
 }
 AI_Search::Frontier::~Frontier()
 {
     _states.clear();
 }
 
-void AI_Search::Frontier::addStates(std::vector<State*> states, std::function<bool(State*, State*)> sortAlgorithm)
+void AI_Search::Frontier::addStates(std::vector<State*> states)
 {
     _states.insert(_states.end(), states.begin(), states.end());
-    std::sort(_states.begin(), _states.end(), sortAlgorithm);
+    std::sort(_states.begin(), _states.end(), _sortAlgorithm);
 }
 void AI_Search::Frontier::removeFirst()
 {

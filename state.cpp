@@ -42,14 +42,14 @@ double AI_Search::State::getCost() const
     return _cost;
 }
 
-std::pair<AI_Search::Id*, bool> AI_Search::State::search(Frontier* frontier, std::function<bool(State*, State*)> sortAlgorithm)
+std::pair<AI_Search::Id*, bool> AI_Search::State::search(Frontier* frontier)
 {
     if (isFinal())
     {
         return std::pair<Id*, bool>(_id, true);
     }
     _childs = genChilds(getAllowedOperators());
-    frontier->addStates(_childs, sortAlgorithm);
+    frontier->addStates(_childs);
 
     return std::pair<Id*, bool>(_id, false);
 }

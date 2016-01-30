@@ -25,7 +25,7 @@ public:
     int getDepth() const;
     double getCost() const;
 
-    std::pair<Id*, bool> search(Frontier* frontier, std::function<bool(State*, State*)> sortAlgorithm);
+    std::pair<Id*, bool> search(Frontier* frontier);
     void getListOfOperators(std::vector<Operator*>* list);
 
 protected:

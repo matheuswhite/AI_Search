@@ -15,12 +15,12 @@ int main()
 {
     //6x8241735
     State* initialState = new EightPuzzleState(new EightPuzzleId("123456x78"), nullptr, new EightPuzzleOperator(""), 0, 0);
-    Frontier* frontier = new Frontier(initialState);
+    Frontier* frontier = new Frontier(initialState, BFS_Algorithm);
     std::vector<Operator*> listOfOperators;
 
     while(!frontier->getStates().empty())
     {
-        std::pair<Id*, bool> result = frontier->getStates().at(0)->search(frontier, BFS_Algorithm);
+        std::pair<Id*, bool> result = frontier->getStates().at(0)->search(frontier);
 
         std::cout << ((EightPuzzleId*)result.first)->getIdValue() << "|" << result.second << "|" <<
                      frontier->getStates().at(0)->getDepth() << std::endl;

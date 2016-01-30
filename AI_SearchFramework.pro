@@ -21,7 +21,8 @@ SOURCES += main.cpp \
     state.cpp \
     frontier.cpp \
     eightpuzzleid.cpp \
-    eightpuzzleoperator.cpp
+    eightpuzzleoperator.cpp \
+    solver.cpp
 
 HEADERS += \
     eightpuzzlestate.h \
@@ -30,4 +31,5 @@ HEADERS += \
     id.h \
     operator.h \
     eightpuzzleid.h \
-    eightpuzzleoperator.h
+    eightpuzzleoperator.h \
+    solver.h
