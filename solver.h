@@ -16,7 +16,7 @@ public:
     State* getInitialState() const;
     State* getFinalState() const;
 
-    std::vector<Operator*> solver();
+    std::vector<Operator*> solve();
 };
 
 }

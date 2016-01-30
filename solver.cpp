@@ -19,7 +19,7 @@ AI_Search::State* AI_Search::Solver::getFinalState() const
     return _finalState;
 }
 
-std::vector<AI_Search::Operator*> AI_Search::Solver::solver()
+std::vector<AI_Search::Operator*> AI_Search::Solver::solve()
 {
     std::vector<Operator*> listOfOperators;
     listOfOperators.clear();
@@ -33,6 +33,8 @@ std::vector<AI_Search::Operator*> AI_Search::Solver::solver()
 
             _frontier->getStates().at(0)->getListOfOperators(&listOfOperators);
             std::reverse(listOfOperators.begin(), listOfOperators.end());
+
+            _finalState = _frontier->getStates().at(0);
 
             break;
         }
