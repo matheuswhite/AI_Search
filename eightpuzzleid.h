@@ -5,7 +5,7 @@
 
 namespace EightPuzzle {
 
-class EightPuzzleId : public Id
+class EightPuzzleId : public AI_Search::Id
 {
     std::string _value;
 public:
@@ -13,8 +13,6 @@ public:
     virtual ~EightPuzzleId();
 
     std::string getIdValue() const;
-
-    bool operator ==(const EightPuzzleId& other) const;
 };
 
 }

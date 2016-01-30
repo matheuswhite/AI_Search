@@ -2,10 +2,11 @@
 
 #include <operator.h>
 #include <string>
+#include <iostream>
 
 namespace EightPuzzle {
 
-class EightPuzzleOperator : public Operator
+class EightPuzzleOperator : public AI_Search::Operator
 {
     std::string _value;
 public:
@@ -13,8 +14,6 @@ public:
     virtual ~EightPuzzleOperator();
 
     std::string getOperatorValue() const;
-
-    bool operator ==(const EightPuzzleOperator& other) const;
 };
 
 }

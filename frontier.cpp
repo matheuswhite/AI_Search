@@ -4,7 +4,7 @@ AI_Search::Frontier::Frontier(State* initialState)
 {
     _states.push_back(initialState);
 }
-virtual AI_Search::Frontier::~Frontier()
+AI_Search::Frontier::~Frontier()
 {
     _states.clear();
 }

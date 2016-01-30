@@ -14,8 +14,3 @@ std::string EightPuzzle::EightPuzzleOperator::getOperatorValue() const
 {
     return _value;
 }
-
-bool EightPuzzle::EightPuzzleOperator::operator ==(const EightPuzzleOperator& other) const
-{
-    return _value.compare(other.getOperatorValue()) == 0;
-}

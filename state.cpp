@@ -8,7 +8,7 @@ AI_Search::State::State(Id* id, State* father, Operator* fatherOperator, int dep
     _depth = depth;
     _cost = cost;
 }
-virtual AI_Search::State::~State()
+AI_Search::State::~State()
 {
     delete _id;
     _id = nullptr;
@@ -17,7 +17,7 @@ virtual AI_Search::State::~State()
     _childs.clear();
 }
 
-Id* AI_Search::State::getId() const
+AI_Search::Id* AI_Search::State::getId() const
 {
     return _id;
 }
@@ -25,7 +25,7 @@ AI_Search::State* AI_Search::State::getFather() const
 {
     return _father;
 }
-Operator* AI_Search::State::getFatherOperator() const
+AI_Search::Operator* AI_Search::State::getFatherOperator() const
 {
     return _fatherOperator;
 }
@@ -42,7 +42,7 @@ double AI_Search::State::getCost() const
     return _cost;
 }
 
-std::pair<Id*, bool> AI_Search::State::search(Frontier* frontier, std::function<bool(State*, State*)> sortAlgorithm)
+std::pair<AI_Search::Id*, bool> AI_Search::State::search(Frontier* frontier, std::function<bool(State*, State*)> sortAlgorithm)
 {
     if (isFinal())
     {
