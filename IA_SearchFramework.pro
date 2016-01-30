@@ -23,6 +23,5 @@ SOURCES += main.cpp \
 
 HEADERS += \
     eightpuzzlestate.h \
-    solver.h \
     state.h \
     frontier.h
