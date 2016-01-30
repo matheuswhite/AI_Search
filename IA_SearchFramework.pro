@@ -18,10 +18,11 @@ TEMPLATE = app
 
 SOURCES += main.cpp \
     eightpuzzlestate.cpp \
-    state.cpp
+    state.cpp \
+    frontier.cpp
 
 HEADERS += \
-    ai_search.h \
     eightpuzzlestate.h \
     solver.h \
-    state.h
+    state.h \
+    frontier.h

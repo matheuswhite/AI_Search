@@ -1,6 +1,6 @@
 #pragma once
 
-#include <vector>
+#include <frontier.h>
 
 namespace AI_Search {
 
