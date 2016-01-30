@@ -56,7 +56,7 @@ std::vector<State<std::string, std::string> *> EightPuzzle::ConcreateState::genC
 
         std::string side = allowedOperators[var];
 
-        State<std::string, std::string>* child = new ConcreateState(moveBlankPiece(side), this, side, getDepth() + 1, getCost() + 1);
+        State<std::string, std::string>* child = new ConcreateState(applyOperator(side), this, side, getDepth() + 1, getCost() + 1);
 
         childs.push_back(child);
     }
@@ -72,25 +72,25 @@ std::pair<int, int> EightPuzzle::ConcreateState::getBlankPiecePos()
     return std::pair<int, int>(row, col);
 }
 
-std::string EightPuzzle::ConcreateState::moveBlankPiece(std::string side)
+std::string EightPuzzle::ConcreateState::applyOperator(std::string op)
 {
     std::string newId = getId();
     std::pair<int, int> blankPos = getBlankPiecePos();
     std::pair<int, int> numberPos;
 
-    if (side.compare("up") == 0)
+    if (op.compare("up") == 0)
     {
         numberPos = std::pair<int, int>(blankPos.first - 1, blankPos.second);
     }
-    else if (side.compare("down") == 0)
+    else if (op.compare("down") == 0)
     {
         numberPos = std::pair<int, int>(blankPos.first + 1, blankPos.second);
     }
-    else if (side.compare("left") == 0)
+    else if (op.compare("left") == 0)
     {
         numberPos = std::pair<int, int>(blankPos.first, blankPos.second - 1);
     }
-    else if (side.compare("right") == 0)
+    else if (op.compare("right") == 0)
     {
         numberPos = std::pair<int, int>(blankPos.first, blankPos.second + 1);
     }

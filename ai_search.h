@@ -67,6 +67,7 @@ public:
     virtual bool isFinal() = 0;
     virtual std::vector<Op> getAllowedOperators() = 0;
     virtual std::vector<State<T, Op>*> genChilds(std::vector<Op> allowedOperators) = 0;
+    virtual T applyOperator(Op op) = 0;
 
     T getId() const
     {
