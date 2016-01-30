@@ -1,6 +1,8 @@
 #pragma once
 
 #include <frontier.h>
+#include <id.h>
+#include <operator.h>
 
 namespace AI_Search {
 
