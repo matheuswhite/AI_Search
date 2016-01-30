@@ -19,11 +19,15 @@ TEMPLATE = app
 SOURCES += main.cpp \
     eightpuzzlestate.cpp \
     state.cpp \
-    frontier.cpp
+    frontier.cpp \
+    eightpuzzleid.cpp \
+    eightpuzzleoperator.cpp
 
 HEADERS += \
     eightpuzzlestate.h \
     state.h \
     frontier.h \
     id.h \
-    operator.h
+    operator.h \
+    eightpuzzleid.h \
+    eightpuzzleoperator.h

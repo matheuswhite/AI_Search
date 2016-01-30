@@ -1,6 +1,8 @@
 #pragma once
 
 #include <state.h>
+#include <eightpuzzleid.h>
+#include <eightpuzzleoperator.h>
 
 using namespace AI_Search;
 
