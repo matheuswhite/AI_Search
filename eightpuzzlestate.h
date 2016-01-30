@@ -3,6 +3,7 @@
 #include <state.h>
 #include <eightpuzzleid.h>
 #include <eightpuzzleoperator.h>
+#include <algorithm>
 
 using namespace AI_Search;
 
@@ -12,14 +13,14 @@ class EightPuzzleState : public State
 {
     std::pair<int, int> getBlankPiecePos();
 public:
-    EightPuzzleState(EightPuzzleId id, State* father, EightPuzzleOperator fatherOperator, int depth, double cost);
+    EightPuzzleState(EightPuzzleId* id, State* father, EightPuzzleOperator* fatherOperator, int depth, double cost);
     virtual ~EightPuzzleState();
 
 protected:
     bool isFinal();
-    std::vector<EightPuzzleOperator> getAllowedOperators();
-    std::vector<EightPuzzleState*> genChilds(std::vector<EightPuzzleOperator> allowedOperators);
-    EightPuzzleId* applyOperator(EightPuzzleOperator op);
+    std::vector<Operator*> getAllowedOperators();
+    std::vector<State*> genChilds(std::vector<Operator*> allowedOperators);
+    Id* applyOperator(Operator* op);
 };
 
 }
