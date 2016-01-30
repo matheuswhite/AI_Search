@@ -1,6 +1,6 @@
 #include "state.h"
 
-AI_Search::State::State(Id* id, State* father, Operator* fatherOperator, int depth, double cost)
+AI_Search::State::State(Id* id, State* father, Operator fatherOperator, int depth, double cost)
 {
     _id = id;
     _father = father;
@@ -25,7 +25,7 @@ AI_Search::State* AI_Search::State::getFather() const
 {
     return _father;
 }
-Operator* AI_Search::State::getFatherOperator() const
+Operator AI_Search::State::getFatherOperator() const
 {
     return _fatherOperator;
 }

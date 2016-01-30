@@ -1,6 +1,6 @@
 #include "eightpuzzlestate.h"
 
-EightPuzzle::EightPuzzleState::EightPuzzleState(std::string id, State<std::string, std::string>* father, std::string fatherOperator, int depth, double cost) : State<std::string, std::string>(id, father, fatherOperator, depth, cost)
+EightPuzzle::EightPuzzleState::EightPuzzleState(EightPuzzleId id, State* father, EightPuzzleOperator fatherOperator, int depth, double cost) : State(id, father, fatherOperator, depth, cost)
 {
 }
 
@@ -13,7 +13,7 @@ bool EightPuzzle::EightPuzzleState::isFinal()
     return getId().compare("12345678x") == 0;
 }
 
-std::vector<std::string> EightPuzzle::EightPuzzleState::getAllowedOperators()
+std::vector<EightPuzzleOperator> EightPuzzle::EightPuzzleState::getAllowedOperators()
 {
     std::pair<int, int> pos = getBlankPiecePos();
     std::vector<std::string> operatorAllowed;
@@ -48,7 +48,7 @@ std::vector<std::string> EightPuzzle::EightPuzzleState::getAllowedOperators()
     return operatorAllowed;
 }
 
-std::vector<State<std::string, std::string> *> EightPuzzle::EightPuzzleState::genChilds(std::vector<std::string> allowedOperators)
+std::vector<State*> EightPuzzle::EightPuzzleState::genChilds(std::vector<EightPuzzleOperator> allowedOperators)
 {
     std::vector<State<std::string, std::string>*> childs;
 
@@ -72,7 +72,7 @@ std::pair<int, int> EightPuzzle::EightPuzzleState::getBlankPiecePos()
     return std::pair<int, int>(row, col);
 }
 
-std::string EightPuzzle::EightPuzzleState::applyOperator(std::string op)
+EightPuzzleId* EightPuzzle::EightPuzzleState::applyOperator(EightPuzzleOperator op)
 {
     std::string newId = getId();
     std::pair<int, int> blankPos = getBlankPiecePos();

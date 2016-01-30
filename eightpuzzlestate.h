@@ -1,23 +1,23 @@
 #pragma once
 
-#include <ai_search.h>
-#include <iostream>
+#include <state.h>
 
 using namespace AI_Search;
 
 namespace EightPuzzle {
 
-class EightPuzzleState : public State<std::string, std::string>
+class EightPuzzleState : public State
 {
     std::pair<int, int> getBlankPiecePos();
 public:
-    EightPuzzleState(std::string id, State<std::string, std::string>* father, std::string fatherOperator, int depth, double cost);
+    EightPuzzleState(EightPuzzleId id, State* father, EightPuzzleOperator fatherOperator, int depth, double cost);
     virtual ~EightPuzzleState();
 
+protected:
     bool isFinal();
-    std::vector<std::string> getAllowedOperators();
-    std::vector<State<std::string, std::string>*> genChilds(std::vector<std::string> allowedOperators);
-    std::string applyOperator(std::string op);
+    std::vector<EightPuzzleOperator> getAllowedOperators();
+    std::vector<State*> genChilds(std::vector<EightPuzzleOperator> allowedOperators);
+    EightPuzzleId* applyOperator(EightPuzzleOperator op);
 };
 
 }
