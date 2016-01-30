@@ -13,22 +13,22 @@ bool EightPuzzle::EightPuzzleState::isFinal()
     return getId().compare("12345678x") == 0;
 }
 
-std::vector<EightPuzzleOperator> EightPuzzle::EightPuzzleState::getAllowedOperators()
+std::vector<EightPuzzle::EightPuzzleOperator> EightPuzzle::EightPuzzleState::getAllowedOperators()
 {
     std::pair<int, int> pos = getBlankPiecePos();
-    std::vector<std::string> operatorAllowed;
+    std::vector<EightPuzzleOperator> operatorAllowed;
 
-    operatorAllowed.push_back("up");
-    operatorAllowed.push_back("down");
-    operatorAllowed.push_back("left");
-    operatorAllowed.push_back("right");
+    operatorAllowed.push_back(EightPuzzleId("up"));
+    operatorAllowed.push_back(EightPuzzleId("down"));
+    operatorAllowed.push_back(EightPuzzleId("left"));
+    operatorAllowed.push_back(EightPuzzleId("right"));
 
     switch (pos.first) {
     case 0:
-        operatorAllowed.erase(std::remove(operatorAllowed.begin(), operatorAllowed.end(), "up"), operatorAllowed.end());
+        operatorAllowed.erase(std::remove(operatorAllowed.begin(), operatorAllowed.end(), EightPuzzleId("up")), operatorAllowed.end());
         break;
     case 2:
-        operatorAllowed.erase(std::remove(operatorAllowed.begin(), operatorAllowed.end(), "down"), operatorAllowed.end());
+        operatorAllowed.erase(std::remove(operatorAllowed.begin(), operatorAllowed.end(), EightPuzzleId("down")), operatorAllowed.end());
         break;
     default:
         break;
@@ -36,10 +36,10 @@ std::vector<EightPuzzleOperator> EightPuzzle::EightPuzzleState::getAllowedOperat
 
     switch (pos.second) {
     case 0:
-        operatorAllowed.erase(std::remove(operatorAllowed.begin(), operatorAllowed.end(), "left"), operatorAllowed.end());
+        operatorAllowed.erase(std::remove(operatorAllowed.begin(), operatorAllowed.end(), EightPuzzleId("left")), operatorAllowed.end());
         break;
     case 2:
-        operatorAllowed.erase(std::remove(operatorAllowed.begin(), operatorAllowed.end(), "right"), operatorAllowed.end());
+        operatorAllowed.erase(std::remove(operatorAllowed.begin(), operatorAllowed.end(), EightPuzzleId("right")), operatorAllowed.end());
         break;
     default:
         break;
@@ -48,17 +48,15 @@ std::vector<EightPuzzleOperator> EightPuzzle::EightPuzzleState::getAllowedOperat
     return operatorAllowed;
 }
 
-std::vector<State*> EightPuzzle::EightPuzzleState::genChilds(std::vector<EightPuzzleOperator> allowedOperators)
+std::vector<EightPuzzle::EightPuzzleState*> EightPuzzle::EightPuzzleState::genChilds(std::vector<EightPuzzleOperator> allowedOperators)
 {
-    std::vector<State<std::string, std::string>*> childs;
+    std::vector<EightPuzzleState*> childs;
 
     for (int var = 0; var < allowedOperators.size(); ++var) {
 
-        std::string side = allowedOperators[var];
+        EightPuzzleOperator side = allowedOperators[var];
 
-        State<std::string, std::string>* child = new EightPuzzleState(applyOperator(side), this, side, getDepth() + 1, getCost() + 1);
-
-        childs.push_back(child);
+        childs.push_back(new EightPuzzleState(applyOperator(side), this, side, getDepth() + 1, getCost() + 1));
     }
 
     return childs;
@@ -72,25 +70,25 @@ std::pair<int, int> EightPuzzle::EightPuzzleState::getBlankPiecePos()
     return std::pair<int, int>(row, col);
 }
 
-EightPuzzleId* EightPuzzle::EightPuzzleState::applyOperator(EightPuzzleOperator op)
+EightPuzzle::EightPuzzleId* EightPuzzle::EightPuzzleState::applyOperator(EightPuzzleOperator op)
 {
-    std::string newId = getId();
+    std::string newId = getId().getIdValue();
     std::pair<int, int> blankPos = getBlankPiecePos();
     std::pair<int, int> numberPos;
 
-    if (op.compare("up") == 0)
+    if (op == EightPuzzleOperator("up"))
     {
         numberPos = std::pair<int, int>(blankPos.first - 1, blankPos.second);
     }
-    else if (op.compare("down") == 0)
+    else if (op == EightPuzzleOperator("down"))
     {
         numberPos = std::pair<int, int>(blankPos.first + 1, blankPos.second);
     }
-    else if (op.compare("left") == 0)
+    else if (op == EightPuzzleOperator("left") == 0)
     {
         numberPos = std::pair<int, int>(blankPos.first, blankPos.second - 1);
     }
-    else if (op.compare("right") == 0)
+    else if (op == EightPuzzleOperator("right"))
     {
         numberPos = std::pair<int, int>(blankPos.first, blankPos.second + 1);
     }
@@ -104,5 +102,5 @@ EightPuzzleId* EightPuzzle::EightPuzzleState::applyOperator(EightPuzzleOperator 
     newId.replace(blankPos.first * 3 + blankPos.second, 1, letter1.c_str());
     newId.replace(numberPos.first * 3 + numberPos.second, 1, letter2.c_str());
 
-    return newId;
+    return new EightPuzzleId(newId);
 }

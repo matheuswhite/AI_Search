@@ -13,6 +13,8 @@ public:
     virtual ~EightPuzzleId();
 
     std::string getIdValue() const;
+
+    bool operator ==(const EightPuzzleId& other) const;
 };
 
 }

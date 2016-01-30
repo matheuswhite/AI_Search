@@ -13,6 +13,8 @@ public:
     virtual ~EightPuzzleOperator();
 
     std::string getOperatorValue() const;
+
+    bool operator ==(const EightPuzzleOperator& other) const;
 };
 
 }

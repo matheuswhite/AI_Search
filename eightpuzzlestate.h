@@ -18,7 +18,7 @@ public:
 protected:
     bool isFinal();
     std::vector<EightPuzzleOperator> getAllowedOperators();
-    std::vector<State*> genChilds(std::vector<EightPuzzleOperator> allowedOperators);
+    std::vector<EightPuzzleState*> genChilds(std::vector<EightPuzzleOperator> allowedOperators);
     EightPuzzleId* applyOperator(EightPuzzleOperator op);
 };
 
