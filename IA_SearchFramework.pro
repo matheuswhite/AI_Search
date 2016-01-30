@@ -17,8 +17,11 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp \
-    concreatestate.cpp
+    eightpuzzlestate.cpp \
+    state.cpp
 
 HEADERS += \
-    concreatestate.h \
-    ai_search.h
+    ai_search.h \
+    eightpuzzlestate.h \
+    solver.h \
+    state.h

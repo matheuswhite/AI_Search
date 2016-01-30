@@ -1,19 +1,19 @@
-#include "concreatestate.h"
+#include "eightpuzzlestate.h"
 
-EightPuzzle::ConcreateState::ConcreateState(std::string id, State<std::string, std::string>* father, std::string fatherOperator, int depth, double cost) : State<std::string, std::string>(id, father, fatherOperator, depth, cost)
+EightPuzzle::EightPuzzleState::EightPuzzleState(std::string id, State<std::string, std::string>* father, std::string fatherOperator, int depth, double cost) : State<std::string, std::string>(id, father, fatherOperator, depth, cost)
 {
 }
 
-EightPuzzle::ConcreateState::~ConcreateState()
+EightPuzzle::EightPuzzleState::~EightPuzzleState()
 {
 }
 
-bool EightPuzzle::ConcreateState::isFinal()
+bool EightPuzzle::EightPuzzleState::isFinal()
 {
     return getId().compare("12345678x") == 0;
 }
 
-std::vector<std::string> EightPuzzle::ConcreateState::getAllowedOperators()
+std::vector<std::string> EightPuzzle::EightPuzzleState::getAllowedOperators()
 {
     std::pair<int, int> pos = getBlankPiecePos();
     std::vector<std::string> operatorAllowed;
@@ -48,7 +48,7 @@ std::vector<std::string> EightPuzzle::ConcreateState::getAllowedOperators()
     return operatorAllowed;
 }
 
-std::vector<State<std::string, std::string> *> EightPuzzle::ConcreateState::genChilds(std::vector<std::string> allowedOperators)
+std::vector<State<std::string, std::string> *> EightPuzzle::EightPuzzleState::genChilds(std::vector<std::string> allowedOperators)
 {
     std::vector<State<std::string, std::string>*> childs;
 
@@ -56,7 +56,7 @@ std::vector<State<std::string, std::string> *> EightPuzzle::ConcreateState::genC
 
         std::string side = allowedOperators[var];
 
-        State<std::string, std::string>* child = new ConcreateState(applyOperator(side), this, side, getDepth() + 1, getCost() + 1);
+        State<std::string, std::string>* child = new EightPuzzleState(applyOperator(side), this, side, getDepth() + 1, getCost() + 1);
 
         childs.push_back(child);
     }
@@ -64,7 +64,7 @@ std::vector<State<std::string, std::string> *> EightPuzzle::ConcreateState::genC
     return childs;
 }
 
-std::pair<int, int> EightPuzzle::ConcreateState::getBlankPiecePos()
+std::pair<int, int> EightPuzzle::EightPuzzleState::getBlankPiecePos()
 {
     std::size_t pos = getId().find("x");
     int row = pos / 3;
@@ -72,7 +72,7 @@ std::pair<int, int> EightPuzzle::ConcreateState::getBlankPiecePos()
     return std::pair<int, int>(row, col);
 }
 
-std::string EightPuzzle::ConcreateState::applyOperator(std::string op)
+std::string EightPuzzle::EightPuzzleState::applyOperator(std::string op)
 {
     std::string newId = getId();
     std::pair<int, int> blankPos = getBlankPiecePos();

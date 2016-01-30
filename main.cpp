@@ -1,5 +1,5 @@
 #include <iostream>
-#include <concreatestate.h>
+#include <eightpuzzlestate.h>
 
 using namespace AI_Search;
 using namespace EightPuzzle;
@@ -12,7 +12,7 @@ bool BFS_Algorithm(State<std::string, std::string>* state1, State<std::string, s
 int main()
 {
     //6x8241735
-    State<std::string, std::string>* initialState = new ConcreateState("123456x78", nullptr, "", 0, 0);
+    State<std::string, std::string>* initialState = new EightPuzzleState("123456x78", nullptr, "", 0, 0);
     Frontier<std::string, std::string>* frontier = new Frontier<std::string, std::string>(initialState);
     std::vector<std::string> listOfOperators;
 

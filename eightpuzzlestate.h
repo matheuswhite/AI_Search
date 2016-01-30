@@ -7,12 +7,12 @@ using namespace AI_Search;
 
 namespace EightPuzzle {
 
-class ConcreateState : public State<std::string, std::string>
+class EightPuzzleState : public State<std::string, std::string>
 {
     std::pair<int, int> getBlankPiecePos();
 public:
-    ConcreateState(std::string id, State<std::string, std::string>* father, std::string fatherOperator, int depth, double cost);
-    virtual ~ConcreateState();
+    EightPuzzleState(std::string id, State<std::string, std::string>* father, std::string fatherOperator, int depth, double cost);
+    virtual ~EightPuzzleState();
 
     bool isFinal();
     std::vector<std::string> getAllowedOperators();
