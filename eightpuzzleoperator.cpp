@@ -10,6 +10,11 @@ EightPuzzle::EightPuzzleOperator::~EightPuzzleOperator()
 
 }
 
+std::string EightPuzzle::EightPuzzleOperator::toString()
+{
+    return _value;
+}
+
 std::string EightPuzzle::EightPuzzleOperator::getOperatorValue() const
 {
     return _value;

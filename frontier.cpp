@@ -1,26 +1,40 @@
 #include "frontier.h"
 
-AI_Search::Frontier::Frontier(State* initialState)
+AI_Search::Frontier::Frontier(State* initialState, std::function<bool(State*, State*)> sortAlgorithm)
 {
     _states.push_back(initialState);
+    _sortAlgorithm = sortAlgorithm;
 }
 AI_Search::Frontier::~Frontier()
 {
     _states.clear();
 }
 
-void AI_Search::Frontier::addStates(std::vector<State*> states, std::function<bool(State*, State*)> sortAlgorithm)
+std::function<bool(AI_Search::State*, AI_Search::State*)> AI_Search::Frontier::getSortAlgorithm() const
+{
+    return _sortAlgorithm;
+}
+
+std::string AI_Search::Frontier::toString()
+{
+    return "Frontier:" +  std::to_string(_states.size());
+}
+
+void AI_Search::Frontier::addStates(std::vector<State*> states)
 {
     _states.insert(_states.end(), states.begin(), states.end());
-    std::sort(_states.begin(), _states.end(), sortAlgorithm);
+    std::sort(_states.begin(), _states.end(), _sortAlgorithm);
 }
+
 void AI_Search::Frontier::removeFirst()
 {
-    _states.erase(_states.begin());
+    if (_states.size() > 0)
+        _states.erase(_states.begin());
 }
-void AI_Search::Frontier::removeAt(unsigned int index)
+
+void AI_Search::Frontier::clearStates()
 {
-    _states.erase(_states.begin() + index);
+    _states.clear();
 }
 
 std::vector<AI_Search::State*> AI_Search::Frontier::getStates() const

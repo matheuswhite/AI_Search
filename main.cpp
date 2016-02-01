@@ -1,47 +1,34 @@
 #include <iostream>
 #include <eightpuzzlestate.h>
-#include <frontier.h>
-#include <algorithm>
+#include <solver.h>
+#include <iterativesolver.h>
+#include <searchalgorithms.h>
 
 using namespace AI_Search;
 using namespace EightPuzzle;
-
-bool BFS_Algorithm(State* state1, State* state2)
-{
-    return state1->getDepth() < state2->getDepth();
-}
 
 int main()
 {
     //6x8241735
     State* initialState = new EightPuzzleState(new EightPuzzleId("123456x78"), nullptr, new EightPuzzleOperator(""), 0, 0);
-    Frontier* frontier = new Frontier(initialState);
-    std::vector<Operator*> listOfOperators;
+    Solver* solver = new IterativeSolver(initialState, DFS_Algorithm, 10);
 
-    while(!frontier->getStates().empty())
+    std::vector<Operator*> listOperator = solver->solve();
+
+    if (listOperator.size() != 0)
     {
-        std::pair<Id*, bool> result = frontier->getStates().at(0)->search(frontier, BFS_Algorithm);
+        std::cout << "Initial State: " << ((EightPuzzleId*)solver->getInitialState()->getId())->getIdValue() << std::endl;
+        std::cout << "Final State: " << ((EightPuzzleId*)solver->getFinalState()->getId())->getIdValue() << std::endl;
+        std::cout << "Steps made: " << ((IterativeSolver*)solver)->getStepsMade() << std::endl;
 
-        std::cout << ((EightPuzzleId*)result.first)->getIdValue() << "|" << result.second << "|" <<
-                     frontier->getStates().at(0)->getDepth() << std::endl;
-
-        if (result.second)
+        std::cout << "--List of Operators--" << std::endl;
+        for (Operator* op : listOperator)
         {
-            std::cout << std::endl;
-            std::cout << "--Final State--" << std::endl ;
-            std::cout << ((EightPuzzleId*)result.first)->getIdValue() << std::endl << std::endl;
-
-            frontier->getStates().at(0)->getListOfOperators(&listOfOperators);
-            std::reverse(listOfOperators.begin(), listOfOperators.end());
-
-            std::cout << "--Operators--" << std::endl;
-            for (int var = listOfOperators.size() - 1; var >= 0; --var) {
-                std::cout << ((EightPuzzleOperator*)listOfOperators.at(var))->getOperatorValue() << std::endl;
-            }
-
-            return 0;
+            std::cout << ((EightPuzzleOperator*)op)->getOperatorValue() << std::endl;
         }
-
-        frontier->removeFirst();
+    }
+    else
+    {
+        std::cout << "--No Solution--" << std::endl;
     }
 }

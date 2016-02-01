@@ -13,6 +13,8 @@ public:
     EightPuzzleOperator(std::string value);
     virtual ~EightPuzzleOperator();
 
+    std::string toString();
+
     std::string getOperatorValue() const;
 };
 

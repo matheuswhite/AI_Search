@@ -8,6 +8,21 @@ EightPuzzle::EightPuzzleState::~EightPuzzleState()
 {
 }
 
+std::string EightPuzzle::EightPuzzleState::toString()
+{
+    std::string output = "Id:";
+    if (getId() != nullptr)
+        output += getId()->toString();
+    else
+        output += "null";
+    output += "|F:";
+    if (getFather() != nullptr)
+        output += getFather()->getId()->toString();
+    else
+        output += "null";
+    return output + "|D:" + std::to_string(getDepth());
+}
+
 bool EightPuzzle::EightPuzzleState::isFinal()
 {
     return ((EightPuzzleId*)getId())->getIdValue().compare("12345678x") == 0;
@@ -61,7 +76,27 @@ std::vector<State*> EightPuzzle::EightPuzzleState::genChilds(std::vector<Operato
 
         Operator* side = allowedOperators[var];
 
-        childs.push_back(new EightPuzzleState((EightPuzzleId*)applyOperator(side), this, (EightPuzzleOperator*)side, getDepth() + 1, getCost() + 1));
+        State* child = new EightPuzzleState((EightPuzzleId*)applyOperator(side), this, (EightPuzzleOperator*)side, getDepth() + 1, getCost() + 1);
+
+        bool exist = false;
+        State* father = child->getFather();
+        std::string id = ((EightPuzzleId*)child->getId())->getIdValue();
+
+        while (father != nullptr)
+        {
+            std::string fatherId = ((EightPuzzleId*)father->getId())->getIdValue();
+
+            exist = (fatherId.compare(id) == 0);
+
+            father = father->getFather();
+        }
+
+        exist = ((EightPuzzleId*)getId())->getIdValue().compare(id) == 0;
+
+        if (!exist)
+        {
+            childs.push_back(child);
+        }
     }
 
     return childs;
@@ -72,6 +107,7 @@ std::pair<int, int> EightPuzzle::EightPuzzleState::getBlankPiecePos()
     std::size_t pos = ((EightPuzzleId*)getId())->getIdValue().find("x");
     int row = pos / 3;
     int col = pos % 3;
+
     return std::pair<int, int>(row, col);
 }
 

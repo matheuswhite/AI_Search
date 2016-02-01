@@ -3,10 +3,11 @@
 #include <frontier.h>
 #include <id.h>
 #include <operator.h>
+#include <object.h>
 
 namespace AI_Search {
 
-class State
+class State : public Object
 {
     Id* _id;
     State* _father;
@@ -25,9 +26,10 @@ public:
     int getDepth() const;
     double getCost() const;
 
-    std::pair<Id*, bool> search(Frontier* frontier, std::function<bool(State*, State*)> sortAlgorithm);
+    std::pair<Id*, bool> search(Frontier* frontier);
     void getListOfOperators(std::vector<Operator*>* list);
 
+    virtual std::string toString() = 0;
 protected:
     virtual bool isFinal() = 0;
     virtual std::vector<Operator*> getAllowedOperators() = 0;

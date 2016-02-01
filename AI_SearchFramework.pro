@@ -8,7 +8,7 @@ QT       += core
 
 QT       -= gui
 
-TARGET = IA_SearchFramework
+TARGET = AI_SearchFramework
 CONFIG   += console \
     c++11
 CONFIG   -= app_bundle
@@ -21,7 +21,11 @@ SOURCES += main.cpp \
     state.cpp \
     frontier.cpp \
     eightpuzzleid.cpp \
-    eightpuzzleoperator.cpp
+    eightpuzzleoperator.cpp \
+    solver.cpp \
+    iterativesolver.cpp \
+    iterativefrontier.cpp \
+    object.cpp
 
 HEADERS += \
     eightpuzzlestate.h \
@@ -30,4 +34,9 @@ HEADERS += \
     id.h \
     operator.h \
     eightpuzzleid.h \
-    eightpuzzleoperator.h
+    eightpuzzleoperator.h \
+    solver.h \
+    searchalgorithms.h \
+    iterativesolver.h \
+    iterativefrontier.h \
+    object.h
