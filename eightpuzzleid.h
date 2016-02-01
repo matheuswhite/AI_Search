@@ -12,6 +12,8 @@ public:
     EightPuzzleId(std::string value);
     virtual ~EightPuzzleId();
 
+    std::string toString();
+
     std::string getIdValue() const;
 };
 

@@ -19,6 +19,16 @@ AI_Search::State* AI_Search::Solver::getFinalState() const
     return _finalState;
 }
 
+std::string AI_Search::Solver::toString()
+{
+    std::string output = "";
+    if (_initialState != nullptr)
+        output += _initialState->toString();
+    if (_finalState != nullptr)
+        output += "|" + _finalState->toString();
+    return "Solver:" + output;
+}
+
 std::vector<AI_Search::Operator*> AI_Search::Solver::solve()
 {
     std::vector<Operator*> listOfOperators;
@@ -26,21 +36,26 @@ std::vector<AI_Search::Operator*> AI_Search::Solver::solve()
 
     while(!_frontier->getStates().empty())
     {
-        std::pair<Id*, bool> result = _frontier->getStates().at(0)->search(_frontier);
+        State* firstState = _frontier->getStates().at(0);
+        _frontier->removeFirst();
+
+        std::cout << "1--" << firstState->toString() << std::endl;
+        std::getchar();
+
+        std::pair<Id*, bool> result = firstState->search(_frontier);
 
         if (result.second)
         {
-
-            _frontier->getStates().at(0)->getListOfOperators(&listOfOperators);
+            firstState->getListOfOperators(&listOfOperators);
             std::reverse(listOfOperators.begin(), listOfOperators.end());
 
-            _finalState = _frontier->getStates().at(0);
+            _finalState = firstState;
 
             break;
         }
-
-        _frontier->removeFirst();
     }
+
+    _frontier->clearStates();
 
     return listOfOperators;
 }

@@ -16,6 +16,7 @@ public:
     EightPuzzleState(EightPuzzleId* id, EightPuzzleState* father, EightPuzzleOperator* fatherOperator, int depth, double cost);
     virtual ~EightPuzzleState();
 
+    std::string toString();
 protected:
     bool isFinal();
     std::vector<Operator*> getAllowedOperators();
