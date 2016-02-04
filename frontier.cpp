@@ -34,6 +34,10 @@ void AI_Search::Frontier::removeFirst()
 
 void AI_Search::Frontier::clearStates()
 {
+    int size = _states.size();
+    for (int var = 0; var < size; ++var) {
+        delete _states.at(var);
+    }
     _states.clear();
 }
 

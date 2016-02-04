@@ -1,6 +1,6 @@
 #include "iterativesolver.h"
 
-AI_Search::IterativeSolver::IterativeSolver(State* initialState, std::function<bool(State*, State*)> searchAlgorithm, unsigned int maxSteps) : Solver(initialState, searchAlgorithm)
+AI_Search::IterativeSolver::IterativeSolver(State* initialState, std::function<bool(State*, State*)> searchAlgorithm, unsigned int maxSteps, bool isVerbose, bool isStepByStep) : Solver(initialState, searchAlgorithm, isVerbose, isStepByStep)
 {
     _maxSteps = maxSteps;
     _initialState = initialState;
@@ -19,7 +19,7 @@ std::vector<AI_Search::Operator*> AI_Search::IterativeSolver::solve()
     int var = 1;
     for (; var <= _maxSteps; ++var)
     {
-        std::cout << "Step " << var << std::endl;
+        if (_isVerbose) std::cout << "Step " << var << std::endl;
 
         _frontier = new IterativeFrontier(_initialState, _frontier->getSortAlgorithm(), var);
 
@@ -29,7 +29,7 @@ std::vector<AI_Search::Operator*> AI_Search::IterativeSolver::solve()
             break;
     }
 
-    _stepsMade = var - 1;
+    _stepsMade = var;
 
     _frontier->clearStates();
 

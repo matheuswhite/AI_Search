@@ -81,19 +81,18 @@ std::vector<State*> EightPuzzle::EightPuzzleState::genChilds(std::vector<Operato
         bool exist = false;
         State* father = child->getFather();
         std::string id = ((EightPuzzleId*)child->getId())->getIdValue();
+        std::string fatherId = "";
 
         while (father != nullptr)
         {
-            std::string fatherId = ((EightPuzzleId*)father->getId())->getIdValue();
+            fatherId = ((EightPuzzleId*)father->getId())->getIdValue();
 
             exist = (fatherId.compare(id) == 0);
 
             father = father->getFather();
         }
 
-        exist = ((EightPuzzleId*)getId())->getIdValue().compare(id) == 0;
-
-        if (!exist)
+        if (!exist || ((EightPuzzleId*)getId())->getIdValue().compare(id) == 0)
         {
             childs.push_back(child);
         }

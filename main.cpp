@@ -7,11 +7,17 @@
 using namespace AI_Search;
 using namespace EightPuzzle;
 
-int main()
+//123
+//456
+//x78
+int main(int argc, char* argv[])
 {
-    //6x8241735
-    State* initialState = new EightPuzzleState(new EightPuzzleId("123456x78"), nullptr, new EightPuzzleOperator(""), 0, 0);
-    Solver* solver = new IterativeSolver(initialState, DFS_Algorithm, 10);
+    //1534826x7
+    State* initialState = new EightPuzzleState(new EightPuzzleId("1534826x7"), nullptr, new EightPuzzleOperator(""), 0, 0);
+    Solver* solver;
+
+    solver = new IterativeSolver(initialState, DFS_Algorithm, 14, true, false);
+    //solver = new Solver(initialState, BFS_Algorithm, true, false);
 
     std::vector<Operator*> listOperator = solver->solve();
 
@@ -31,4 +37,5 @@ int main()
     {
         std::cout << "--No Solution--" << std::endl;
     }
+
 }
