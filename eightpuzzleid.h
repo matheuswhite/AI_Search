@@ -13,6 +13,7 @@ public:
     virtual ~EightPuzzleId();
 
     std::string toString();
+    bool equal(Object *other);
 
     std::string getIdValue() const;
 };

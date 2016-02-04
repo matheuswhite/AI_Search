@@ -11,7 +11,6 @@ class State : public Object
 {
     Id* _id;
     State* _father;
-    std::vector<State*> _childs;
     Operator* _fatherOperator;
     int _depth;
     double _cost;
@@ -22,13 +21,13 @@ public:
     Id* getId() const;
     State* getFather() const;
     Operator* getFatherOperator() const;
-    std::vector<State*> getChilds() const;
     int getDepth() const;
     double getCost() const;
 
     std::pair<Id*, bool> search(Frontier* frontier);
     void getListOfOperators(std::vector<Operator*>* list);
 
+    bool equal();
     virtual std::string toString() = 0;
 protected:
     virtual bool isFinal() = 0;

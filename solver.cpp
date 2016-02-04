@@ -21,16 +21,6 @@ AI_Search::State* AI_Search::Solver::getFinalState() const
     return _finalState;
 }
 
-std::string AI_Search::Solver::toString()
-{
-    std::string output = "";
-    if (_initialState != nullptr)
-        output += _initialState->toString();
-    if (_finalState != nullptr)
-        output += "|" + _finalState->toString();
-    return "Solver:" + output;
-}
-
 std::vector<AI_Search::Operator*> AI_Search::Solver::solve()
 {
     std::vector<Operator*> listOfOperators;

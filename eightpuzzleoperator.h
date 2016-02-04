@@ -14,6 +14,7 @@ public:
     virtual ~EightPuzzleOperator();
 
     std::string toString();
+    bool equal(Object *other);
 
     std::string getOperatorValue() const;
 };

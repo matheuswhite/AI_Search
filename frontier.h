@@ -9,7 +9,7 @@ namespace AI_Search {
 
 class State;
 
-class Frontier : public Object
+class Frontier
 {
 protected:
     std::vector<State*> _states;
@@ -19,8 +19,6 @@ public:
     virtual ~Frontier();
 
     std::function<bool(State*, State*)> getSortAlgorithm() const;
-
-    virtual std::string toString();
 
     virtual void addStates(std::vector<State*> states);
     void removeFirst();

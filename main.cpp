@@ -7,9 +7,6 @@
 using namespace AI_Search;
 using namespace EightPuzzle;
 
-//123
-//456
-//x78
 int main(int argc, char* argv[])
 {
     //1534826x7

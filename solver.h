@@ -6,7 +6,7 @@
 
 namespace AI_Search {
 
-class Solver : public Object
+class Solver
 {
 protected:
     Frontier* _frontier;
@@ -20,8 +20,6 @@ public:
 
     State* getInitialState() const;
     State* getFinalState() const;
-
-    virtual std::string toString();
 
     virtual std::vector<Operator*> solve();
 };

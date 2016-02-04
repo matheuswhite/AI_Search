@@ -15,13 +15,13 @@ std::function<bool(AI_Search::State*, AI_Search::State*)> AI_Search::Frontier::g
     return _sortAlgorithm;
 }
 
-std::string AI_Search::Frontier::toString()
-{
-    return "Frontier:" +  std::to_string(_states.size());
-}
-
 void AI_Search::Frontier::addStates(std::vector<State*> states)
 {
+    for (State* state : _states)
+    {
+
+    }
+
     _states.insert(_states.end(), states.begin(), states.end());
     std::sort(_states.begin(), _states.end(), _sortAlgorithm);
 }
