@@ -27,7 +27,7 @@ public:
     std::pair<Id*, bool> search(Frontier* frontier);
     void getListOfOperators(std::vector<Operator*>* list);
 
-    bool equal();
+    bool equal(Object* other);
     virtual std::string toString() = 0;
 protected:
     virtual bool isFinal() = 0;

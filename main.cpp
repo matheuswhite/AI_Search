@@ -10,11 +10,11 @@ using namespace EightPuzzle;
 int main(int argc, char* argv[])
 {
     //1534826x7
-    State* initialState = new EightPuzzleState(new EightPuzzleId("1534826x7"), nullptr, new EightPuzzleOperator(""), 0, 0);
+    State* initialState = new EightPuzzleState(new EightPuzzleId("123456x78"), nullptr, new EightPuzzleOperator(""), 0, 0);
     Solver* solver;
 
-    solver = new IterativeSolver(initialState, DFS_Algorithm, 14, true, false);
-    //solver = new Solver(initialState, BFS_Algorithm, true, false);
+    //solver = new IterativeSolver(initialState, DFS_Algorithm, 14, true, false);
+    solver = new Solver(initialState, BFS_Algorithm, true, false);
 
     std::vector<Operator*> listOperator = solver->solve();
 
