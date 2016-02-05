@@ -9,4 +9,5 @@ public:
     virtual ~Object();
 
     virtual std::string toString() = 0;
+    virtual bool equal(Object* other) = 0;
 };

@@ -14,7 +14,6 @@ AI_Search::State::~State()
     _id = nullptr;
     _father = nullptr;
     _fatherOperator = nullptr;
-    _childs.clear();
 }
 
 AI_Search::Id* AI_Search::State::getId() const
@@ -28,10 +27,6 @@ AI_Search::State* AI_Search::State::getFather() const
 AI_Search::Operator* AI_Search::State::getFatherOperator() const
 {
     return _fatherOperator;
-}
-std::vector<AI_Search::State*> AI_Search::State::getChilds() const
-{
-    return _childs;
 }
 int AI_Search::State::getDepth() const
 {
@@ -48,8 +43,7 @@ std::pair<AI_Search::Id*, bool> AI_Search::State::search(Frontier* frontier)
     {
         return std::pair<Id*, bool>(_id, true);
     }
-    _childs = genChilds(getAllowedOperators());
-    frontier->addStates(_childs);
+    frontier->addStates(genChilds(getAllowedOperators(), frontier));
 
     return std::pair<Id*, bool>(_id, false);
 }
@@ -62,4 +56,14 @@ void AI_Search::State::getListOfOperators(std::vector<Operator*>* list)
     }
     list->push_back(_fatherOperator);
     _father->getListOfOperators(list);
+}
+
+bool AI_Search::State::equal(Object* other)
+{
+    State* s = dynamic_cast<State*>(other);
+    if (s != nullptr)
+    {
+        return _id->equal(s->getId());
+    }
+    return false;
 }

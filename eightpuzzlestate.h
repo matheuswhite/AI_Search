@@ -20,7 +20,7 @@ public:
 protected:
     bool isFinal();
     std::vector<Operator*> getAllowedOperators();
-    std::vector<State*> genChilds(std::vector<Operator*> allowedOperators);
+    std::vector<State*> genChilds(std::vector<Operator*> allowedOperators, Frontier* frontier);
     Id* applyOperator(Operator* op);
 };
 

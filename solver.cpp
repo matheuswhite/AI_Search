@@ -1,9 +1,11 @@
 #include "solver.h"
 
-AI_Search::Solver::Solver(State* initialState, std::function<bool(State*, State*)> searchAlgorithm)
+AI_Search::Solver::Solver(State* initialState, std::function<bool(State*, State*)> searchAlgorithm, bool isVerbose, bool isStepByStep)
 {
     _initialState = initialState;
     _frontier = new Frontier(initialState, searchAlgorithm);
+    _isVerbose = isVerbose || isStepByStep;
+    _isStepByStep = isStepByStep;
 }
 AI_Search::Solver::~Solver()
 {
@@ -19,16 +21,6 @@ AI_Search::State* AI_Search::Solver::getFinalState() const
     return _finalState;
 }
 
-std::string AI_Search::Solver::toString()
-{
-    std::string output = "";
-    if (_initialState != nullptr)
-        output += _initialState->toString();
-    if (_finalState != nullptr)
-        output += "|" + _finalState->toString();
-    return "Solver:" + output;
-}
-
 std::vector<AI_Search::Operator*> AI_Search::Solver::solve()
 {
     std::vector<Operator*> listOfOperators;
@@ -39,8 +31,8 @@ std::vector<AI_Search::Operator*> AI_Search::Solver::solve()
         State* firstState = _frontier->getStates().at(0);
         _frontier->removeFirst();
 
-        std::cout << "1--" << firstState->toString() << std::endl;
-        std::getchar();
+        if (_isVerbose) std::cout << "!--" << firstState->toString() << std::endl;
+        if (_isStepByStep) std::getchar();
 
         std::pair<Id*, bool> result = firstState->search(_frontier);
 
