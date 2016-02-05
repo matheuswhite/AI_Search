@@ -32,7 +32,7 @@ public:
 protected:
     virtual bool isFinal() = 0;
     virtual std::vector<Operator*> getAllowedOperators() = 0;
-    virtual std::vector<State*> genChilds(std::vector<Operator*> allowedOperators) = 0;
+    virtual std::vector<State*> genChilds(std::vector<Operator*> allowedOperators, Frontier* frontier) = 0;
     virtual Id* applyOperator(Operator* op) = 0;
 };
 

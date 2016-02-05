@@ -68,7 +68,7 @@ std::vector<Operator*> EightPuzzle::EightPuzzleState::getAllowedOperators()
     return operatorAllowed;
 }
 
-std::vector<State*> EightPuzzle::EightPuzzleState::genChilds(std::vector<Operator*> allowedOperators)
+std::vector<State*> EightPuzzle::EightPuzzleState::genChilds(std::vector<Operator*> allowedOperators, Frontier *frontier)
 {
     std::vector<State*> childs;
 
@@ -78,6 +78,8 @@ std::vector<State*> EightPuzzle::EightPuzzleState::genChilds(std::vector<Operato
 
         State* child = new EightPuzzleState((EightPuzzleId*)applyOperator(side), this, (EightPuzzleOperator*)side, getDepth() + 1, getCost() + 1);
 
+        bool existInFrontier = false;
+        /*
         bool exist = false;
         State* father = child->getFather();
         std::string id = ((EightPuzzleId*)child->getId())->getIdValue();
@@ -90,9 +92,17 @@ std::vector<State*> EightPuzzle::EightPuzzleState::genChilds(std::vector<Operato
             exist = (fatherId.compare(id) == 0);
 
             father = father->getFather();
+        }*/
+
+        for (State* s : frontier->getVisitedStates())
+        {
+            if (child->equal(s))
+            {
+                existInFrontier = true;
+            }
         }
 
-        if (!exist || ((EightPuzzleId*)getId())->getIdValue().compare(id) == 0)
+        if (!existInFrontier)
         {
             childs.push_back(child);
         }

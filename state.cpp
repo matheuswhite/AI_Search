@@ -43,7 +43,7 @@ std::pair<AI_Search::Id*, bool> AI_Search::State::search(Frontier* frontier)
     {
         return std::pair<Id*, bool>(_id, true);
     }
-    frontier->addStates(genChilds(getAllowedOperators()));
+    frontier->addStates(genChilds(getAllowedOperators(), frontier));
 
     return std::pair<Id*, bool>(_id, false);
 }

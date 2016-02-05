@@ -3,6 +3,7 @@
 AI_Search::Frontier::Frontier(State* initialState, std::function<bool(State*, State*)> sortAlgorithm)
 {
     _states.push_back(initialState);
+    _visitedStates.push_back(initialState);
     _sortAlgorithm = sortAlgorithm;
 }
 AI_Search::Frontier::~Frontier()
@@ -17,12 +18,8 @@ std::function<bool(AI_Search::State*, AI_Search::State*)> AI_Search::Frontier::g
 
 void AI_Search::Frontier::addStates(std::vector<State*> states)
 {
-    for (State* state : _states)
-    {
-
-    }
-
     _states.insert(_states.end(), states.begin(), states.end());
+    _visitedStates.insert(_visitedStates.end(), states.begin(), states.end());
     std::sort(_states.begin(), _states.end(), _sortAlgorithm);
 }
 
@@ -34,14 +31,16 @@ void AI_Search::Frontier::removeFirst()
 
 void AI_Search::Frontier::clearStates()
 {
-    int size = _states.size();
-    for (int var = 0; var < size; ++var) {
-        delete _states.at(var);
-    }
+    _visitedStates.clear();
     _states.clear();
 }
 
 std::vector<AI_Search::State*> AI_Search::Frontier::getStates() const
 {
     return _states;
+}
+
+std::vector<AI_Search::State*> AI_Search::Frontier::getVisitedStates() const
+{
+    return _visitedStates;
 }
