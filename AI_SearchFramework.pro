@@ -25,7 +25,11 @@ SOURCES += main.cpp \
     solver.cpp \
     iterativesolver.cpp \
     iterativefrontier.cpp \
-    object.cpp
+    object.cpp \
+    hanoitowerid.cpp \
+    hanoitower.cpp \
+    hanoitoweroperator.cpp \
+    hanoitowerstate.cpp
 
 HEADERS += \
     eightpuzzlestate.h \
@@ -39,4 +43,8 @@ HEADERS += \
     searchalgorithms.h \
     iterativesolver.h \
     iterativefrontier.h \
-    object.h
+    object.h \
+    hanoitowerid.h \
+    hanoitower.h \
+    hanoitoweroperator.h \
+    hanoitowerstate.h
