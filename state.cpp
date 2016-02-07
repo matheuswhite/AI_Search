@@ -7,6 +7,7 @@ AI_Search::State::State(Id* id, State* father, Operator* fatherOperator, int dep
     _fatherOperator = fatherOperator;
     _depth = depth;
     _cost = cost;
+    genHeuristic();
 }
 AI_Search::State::~State()
 {
@@ -35,6 +36,16 @@ int AI_Search::State::getDepth() const
 double AI_Search::State::getCost() const
 {
     return _cost;
+}
+
+double AI_Search::State::getHeuristic() const
+{
+    return _heuristic;
+}
+
+void AI_Search::State::genHeuristic()
+{
+    _heuristic = 0;
 }
 
 std::pair<AI_Search::Id*, bool> AI_Search::State::search(Frontier* frontier)
