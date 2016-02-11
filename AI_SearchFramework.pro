@@ -17,24 +17,24 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp \
-    eightpuzzlestate.cpp \
+    EightPuzzle/eightpuzzlestate.cpp \
     state.cpp \
     frontier.cpp \
-    eightpuzzleid.cpp \
-    eightpuzzleoperator.cpp \
+    EightPuzzle/eightpuzzleid.cpp \
+    EightPuzzle/eightpuzzleoperator.cpp \
     solver.cpp \
     iterativesolver.cpp \
     iterativefrontier.cpp \
     object.cpp
 
 HEADERS += \
-    eightpuzzlestate.h \
+    EightPuzzle/eightpuzzlestate.h \
     state.h \
     frontier.h \
     id.h \
     operator.h \
-    eightpuzzleid.h \
-    eightpuzzleoperator.h \
+    EightPuzzle/eightpuzzleid.h \
+    EightPuzzle/eightpuzzleoperator.h \
     solver.h \
     searchalgorithms.h \
     iterativesolver.h \

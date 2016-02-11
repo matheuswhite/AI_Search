@@ -1,5 +1,5 @@
 #include <iostream>
-#include <eightpuzzlestate.h>
+#include "EightPuzzle/eightpuzzlestate.h"
 #include <solver.h>
 #include <iterativesolver.h>
 #include <searchalgorithms.h>
