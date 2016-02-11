@@ -68,6 +68,24 @@ std::vector<Operator*> EightPuzzle::EightPuzzleState::getAllowedOperators()
     return operatorAllowed;
 }
 
+void EightPuzzle::EightPuzzleState::genHeuristic()
+{
+    std::string goalState = "12345678x";
+    int heuristicValue = 0;
+
+    for (int var = 0; var < 9; ++var)
+    {
+        std::string currentPiece = ((EightPuzzleId*)getId())->getIdValue().substr(var,1);
+        std::pair<int, int> currentPos = getNumberPiecePos(currentPiece, ((EightPuzzleId*)getId())->getIdValue());
+        std::pair<int, int> goalPos = getNumberPiecePos(currentPiece, goalState);
+
+        if (currentPos.first != goalPos.first || currentPos.second != goalPos.second)
+            heuristicValue += 1;
+    }
+
+    _heuristic = heuristicValue;
+}
+
 std::vector<State*> EightPuzzle::EightPuzzleState::genChilds(std::vector<Operator*> allowedOperators, Frontier *frontier)
 {
     std::vector<State*> childs;
@@ -79,26 +97,13 @@ std::vector<State*> EightPuzzle::EightPuzzleState::genChilds(std::vector<Operato
         State* child = new EightPuzzleState((EightPuzzleId*)applyOperator(side), this, (EightPuzzleOperator*)side, getDepth() + 1, getCost() + 1);
 
         bool existInFrontier = false;
-        /*
-        bool exist = false;
-        State* father = child->getFather();
-        std::string id = ((EightPuzzleId*)child->getId())->getIdValue();
-        std::string fatherId = "";
-
-        while (father != nullptr)
-        {
-            fatherId = ((EightPuzzleId*)father->getId())->getIdValue();
-
-            exist = (fatherId.compare(id) == 0);
-
-            father = father->getFather();
-        }*/
 
         for (State* s : frontier->getVisitedStates())
         {
             if (child->equal(s))
             {
                 existInFrontier = true;
+                break;
             }
         }
 
@@ -109,6 +114,15 @@ std::vector<State*> EightPuzzle::EightPuzzleState::genChilds(std::vector<Operato
     }
 
     return childs;
+}
+
+std::pair<int, int> EightPuzzle::EightPuzzleState::getNumberPiecePos(std::string piece, std::string state)
+{
+    std::size_t pos = state.find(piece);
+    int row = pos / 3;
+    int col = pos % 3;
+
+    return std::pair<int, int>(row, col);
 }
 
 std::pair<int, int> EightPuzzle::EightPuzzleState::getBlankPiecePos()

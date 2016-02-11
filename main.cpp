@@ -9,13 +9,14 @@ using namespace EightPuzzle;
 
 int main(int argc, char* argv[])
 {
-    //1534826x7
+    //6x3128745
+    //4623187x5
     //123456x78
-    State* initialState = new EightPuzzleState(new EightPuzzleId("1534826x7"), nullptr, new EightPuzzleOperator(""), 0, 0);
+    State* initialState = new EightPuzzleState(new EightPuzzleId("6x3128745"), nullptr, new EightPuzzleOperator(""), 0, 0);
     Solver* solver;
 
-    //solver = new IterativeSolver(initialState, DFS_Algorithm, 14, true, false);
-    solver = new Solver(initialState, BFS_Algorithm, true, false);
+    //solver = new IterativeSolver(initialState, DFS_Algorithm, 15, true, false);
+    solver = new Solver(initialState, AStar, true, false);
 
     std::vector<Operator*> listOperator = solver->solve();
 
@@ -23,7 +24,6 @@ int main(int argc, char* argv[])
     {
         std::cout << "Initial State: " << ((EightPuzzleId*)solver->getInitialState()->getId())->getIdValue() << std::endl;
         std::cout << "Final State: " << ((EightPuzzleId*)solver->getFinalState()->getId())->getIdValue() << std::endl;
-        std::cout << "Steps made: " << ((IterativeSolver*)solver)->getStepsMade() << std::endl;
 
         std::cout << "--List of Operators--" << std::endl;
         for (Operator* op : listOperator)
@@ -35,5 +35,4 @@ int main(int argc, char* argv[])
     {
         std::cout << "--No Solution--" << std::endl;
     }
-
 }
