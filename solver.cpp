@@ -1,9 +1,10 @@
 #include "solver.h"
 
-AI_Search::Solver::Solver(State* initialState, std::function<bool(State*, State*)> searchAlgorithm, bool isVerbose, bool isStepByStep)
+AI_Search::Solver::Solver(State* initialState, State* finalState, std::function<bool(State*, State*)> searchAlgorithm, bool isVerbose, bool isStepByStep)
 {
     _initialState = initialState;
     _frontier = new Frontier(initialState, searchAlgorithm);
+    _finalState = finalState;
     _isVerbose = isVerbose || isStepByStep;
     _isStepByStep = isStepByStep;
 }
@@ -34,17 +35,14 @@ std::vector<AI_Search::Operator*> AI_Search::Solver::solve()
         if (_isVerbose) std::cout << "!--" << firstState->toString() << std::endl;
         if (_isStepByStep) std::getchar();
 
-        std::pair<Id*, bool> result = firstState->search(_frontier);
-
-        if (result.second)
+        if (firstState->equal(_finalState))
         {
-            firstState->getListOfOperators(&listOfOperators);
-            std::reverse(listOfOperators.begin(), listOfOperators.end());
-
-            _finalState = firstState;
+            listOfOperators = firstState->getListOfOperators();
 
             break;
         }
+
+        _frontier->addStates(firstState->genChilds(firstState->getAllowedOperators(), _frontier));
     }
 
     _frontier->clearStates();

@@ -1,7 +1,5 @@
-#include <iostream>
-#include "EightPuzzle/eightpuzzlestate.h"
+#include <EightPuzzle/eightpuzzlestate.h>
 #include <solver.h>
-#include <iterativesolver.h>
 #include <searchalgorithms.h>
 
 using namespace AI_Search;
@@ -13,10 +11,8 @@ int main(int argc, char* argv[])
     //4623187x5
     //123456x78
     State* initialState = new EightPuzzleState(new EightPuzzleId("6x3128745"), nullptr, new EightPuzzleOperator(""), 0, 0);
-    Solver* solver;
-
-    //solver = new IterativeSolver(initialState, DFS_Algorithm, 15, true, false);
-    solver = new Solver(initialState, AStar, true, false);
+    State* finalState = new EightPuzzleState(new EightPuzzleId("123456x78"), nullptr, new EightPuzzleOperator(""), 0, 0);
+    Solver* solver = new Solver(initialState, finalState, AStar, true, false);
 
     std::vector<Operator*> listOperator = solver->solve();
 

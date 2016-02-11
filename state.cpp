@@ -48,25 +48,18 @@ void AI_Search::State::genHeuristic()
     _heuristic = 0;
 }
 
-std::pair<AI_Search::Id*, bool> AI_Search::State::search(Frontier* frontier)
+std::vector<AI_Search::Operator*> AI_Search::State::getListOfOperators()
 {
-    if (isFinal())
+    std::vector<Operator*> output;
+    State* father = this;
+    while(father != nullptr)
     {
-        return std::pair<Id*, bool>(_id, true);
+        output.push_back(father->getFatherOperator());
+        father = father->getFather();
     }
-    frontier->addStates(genChilds(getAllowedOperators(), frontier));
+    std::reverse(output.begin(), output.end());
 
-    return std::pair<Id*, bool>(_id, false);
-}
-
-void AI_Search::State::getListOfOperators(std::vector<Operator*>* list)
-{
-    if (_father == nullptr)
-    {
-        return ;
-    }
-    list->push_back(_fatherOperator);
-    _father->getListOfOperators(list);
+    return output;
 }
 
 bool AI_Search::State::equal(Object* other)

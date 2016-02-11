@@ -27,13 +27,10 @@ public:
     double getCost() const;
     double getHeuristic() const;
 
-    std::pair<Id*, bool> search(Frontier* frontier);
-    void getListOfOperators(std::vector<Operator*>* list);
+    std::vector<Operator*> getListOfOperators();
 
     bool equal(Object* other);
     virtual std::string toString() = 0;
-protected:
-    virtual bool isFinal() = 0;
     virtual std::vector<Operator*> getAllowedOperators() = 0;
     virtual void genHeuristic() = 0;
     virtual std::vector<State*> genChilds(std::vector<Operator*> allowedOperators, Frontier* frontier) = 0;

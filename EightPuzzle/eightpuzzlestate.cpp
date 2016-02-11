@@ -23,11 +23,6 @@ std::string EightPuzzle::EightPuzzleState::toString()
     return output + "|D:" + std::to_string(getDepth());
 }
 
-bool EightPuzzle::EightPuzzleState::isFinal()
-{
-    return ((EightPuzzleId*)getId())->getIdValue().compare("12345678x") == 0;
-}
-
 std::vector<Operator*> EightPuzzle::EightPuzzleState::getAllowedOperators()
 {
     std::pair<int, int> pos = getBlankPiecePos();

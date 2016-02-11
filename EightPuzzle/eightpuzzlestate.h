@@ -18,8 +18,6 @@ public:
     virtual ~EightPuzzleState();
 
     std::string toString();
-protected:
-    bool isFinal();
     std::vector<Operator*> getAllowedOperators();
     void genHeuristic();
     std::vector<State*> genChilds(std::vector<Operator*> allowedOperators, Frontier* frontier);

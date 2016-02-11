@@ -23,9 +23,8 @@ SOURCES += main.cpp \
     EightPuzzle/eightpuzzleid.cpp \
     EightPuzzle/eightpuzzleoperator.cpp \
     solver.cpp \
-    iterativesolver.cpp \
-    iterativefrontier.cpp \
-    object.cpp
+    object.cpp \
+    ParisSubway/parissubwaystate.cpp
 
 HEADERS += \
     EightPuzzle/eightpuzzlestate.h \
@@ -37,6 +36,5 @@ HEADERS += \
     EightPuzzle/eightpuzzleoperator.h \
     solver.h \
     searchalgorithms.h \
-    iterativesolver.h \
-    iterativefrontier.h \
-    object.h
+    object.h \
+    ParisSubway/parissubwaystate.h

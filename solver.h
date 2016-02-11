@@ -15,7 +15,7 @@ protected:
     bool _isVerbose;
     bool _isStepByStep;
 public:
-    Solver(State* initialState, std::function<bool(State*, State*)> searchAlgorithm, bool isVerbose, bool isStepByStep);
+    Solver(State* initialState, State* finalState, std::function<bool(State*, State*)> searchAlgorithm, bool isVerbose, bool isStepByStep);
     virtual ~Solver();
 
     State* getInitialState() const;
