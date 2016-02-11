@@ -103,6 +103,7 @@ std::vector<State*> EightPuzzle::EightPuzzleState::genChilds(std::vector<Operato
             if (child->equal(s))
             {
                 existInFrontier = true;
+                break;
             }
         }
 
