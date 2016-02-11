@@ -19,7 +19,7 @@ bool UniformCost_Algorithm(State* state1, State* state2)
     return state1->getCost() < state2->getCost();
 }
 
-bool AStar_MisplacedPieceCount(State* state1, State* state2)
+bool AStar(State* state1, State* state2)
 {
     return (state1->getCost() + state1->getHeuristic()) < (state2->getCost() + state2->getHeuristic());
 }

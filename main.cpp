@@ -16,7 +16,7 @@ int main(int argc, char* argv[])
     Solver* solver;
 
     //solver = new IterativeSolver(initialState, DFS_Algorithm, 15, true, false);
-    solver = new Solver(initialState, AStar_MisplacedPieceCount, true, false);
+    solver = new Solver(initialState, AStar, true, false);
 
     std::vector<Operator*> listOperator = solver->solve();
 
