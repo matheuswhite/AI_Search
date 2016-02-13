@@ -1,6 +1,7 @@
 #include "eightpuzzlestate.h"
 
-EightPuzzle::EightPuzzleState::EightPuzzleState(EightPuzzleId* id, EightPuzzleState* father, EightPuzzleOperator* fatherOperator, int depth, double cost) : State(id, father, fatherOperator, depth, cost)
+EightPuzzle::EightPuzzleState::EightPuzzleState(std::string id, EightPuzzleState* father, EightPuzzleOperator* fatherOperator, int depth, double cost)
+    : State<std::string>(id, father, fatherOperator, depth, cost)
 {
 }
 
@@ -10,33 +11,23 @@ EightPuzzle::EightPuzzleState::~EightPuzzleState()
 
 std::string EightPuzzle::EightPuzzleState::toString()
 {
-    std::string output = "Id:";
-    if (getId() != nullptr)
-        output += getId()->toString();
-    else
-        output += "null";
-    output += "|F:";
+    std::string output = "Id:" + getId() + "|F:";
     if (getFather() != nullptr)
-        output += getFather()->getId()->toString();
+        output += getFather()->getId();
     else
         output += "null";
     return output + "|D:" + std::to_string(getDepth());
 }
 
-bool EightPuzzle::EightPuzzleState::isFinal()
-{
-    return ((EightPuzzleId*)getId())->getIdValue().compare("12345678x") == 0;
-}
-
-std::vector<Operator*> EightPuzzle::EightPuzzleState::getAllowedOperators()
+std::vector<Operator<std::string>*> EightPuzzle::EightPuzzleState::getAllowedOperators()
 {
     std::pair<int, int> pos = getBlankPiecePos();
-    std::vector<Operator*> operatorAllowed;
+    std::vector<Operator<std::string>*> operatorAllowed;
 
-    Operator* up = new EightPuzzleOperator("up");
-    Operator* down = new EightPuzzleOperator("down");
-    Operator* left = new EightPuzzleOperator("left");
-    Operator* right = new EightPuzzleOperator("right");
+    Operator<std::string>* up = new EightPuzzleOperator(this, "up");
+    Operator<std::string>* down = new EightPuzzleOperator(this, "down");
+    Operator<std::string>* left = new EightPuzzleOperator(this, "left");
+    Operator<std::string>* right = new EightPuzzleOperator(this, "right");
 
     operatorAllowed.push_back(up);
     operatorAllowed.push_back(down);
@@ -75,8 +66,8 @@ void EightPuzzle::EightPuzzleState::genHeuristic()
 
     for (int var = 0; var < 9; ++var)
     {
-        std::string currentPiece = ((EightPuzzleId*)getId())->getIdValue().substr(var,1);
-        std::pair<int, int> currentPos = getNumberPiecePos(currentPiece, ((EightPuzzleId*)getId())->getIdValue());
+        std::string currentPiece = getId().substr(var,1);
+        std::pair<int, int> currentPos = getNumberPiecePos(currentPiece, getId());
         std::pair<int, int> goalPos = getNumberPiecePos(currentPiece, goalState);
 
         if (currentPos.first != goalPos.first || currentPos.second != goalPos.second)
@@ -86,31 +77,18 @@ void EightPuzzle::EightPuzzleState::genHeuristic()
     _heuristic = heuristicValue;
 }
 
-std::vector<State*> EightPuzzle::EightPuzzleState::genChilds(std::vector<Operator*> allowedOperators, Frontier *frontier)
+std::vector<State<std::string>*> EightPuzzle::EightPuzzleState::genChilds(std::vector<Operator<std::string>*> allowedOperators)
 {
-    std::vector<State*> childs;
+    std::vector<State<std::string>*> childs;
 
-    for (int var = 0; var < allowedOperators.size(); ++var) {
+    for (int var = 0; var < allowedOperators.size(); ++var)
+    {
+        EightPuzzleOperator* side = dynamic_cast<EightPuzzleOperator*>(allowedOperators[var]);
 
-        Operator* side = allowedOperators[var];
+        State<std::string>* child = new EightPuzzleState(applyOperator(side), this, side, getDepth() + 1, getCost() + 1);
+        side->setTargetState(child);
 
-        State* child = new EightPuzzleState((EightPuzzleId*)applyOperator(side), this, (EightPuzzleOperator*)side, getDepth() + 1, getCost() + 1);
-
-        bool existInFrontier = false;
-
-        for (State* s : frontier->getVisitedStates())
-        {
-            if (child->equal(s))
-            {
-                existInFrontier = true;
-                break;
-            }
-        }
-
-        if (!existInFrontier)
-        {
-            childs.push_back(child);
-        }
+        childs.push_back(child);
     }
 
     return childs;
@@ -127,32 +105,32 @@ std::pair<int, int> EightPuzzle::EightPuzzleState::getNumberPiecePos(std::string
 
 std::pair<int, int> EightPuzzle::EightPuzzleState::getBlankPiecePos()
 {
-    std::size_t pos = ((EightPuzzleId*)getId())->getIdValue().find("x");
+    std::size_t pos = getId().find("x");
     int row = pos / 3;
     int col = pos % 3;
 
     return std::pair<int, int>(row, col);
 }
 
-Id* EightPuzzle::EightPuzzleState::applyOperator(Operator* op)
+std::string EightPuzzle::EightPuzzleState::applyOperator(EightPuzzleOperator* op)
 {
-    std::string newId = ((EightPuzzleId*)getId())->getIdValue();
+    std::string newId = getId();
     std::pair<int, int> blankPos = getBlankPiecePos();
     std::pair<int, int> numberPos;
 
-    if (((EightPuzzleOperator*)op)->getOperatorValue().compare("up") == 0)
+    if (op->getValue().compare("up") == 0)
     {
         numberPos = std::pair<int, int>(blankPos.first - 1, blankPos.second);
     }
-    else if (((EightPuzzleOperator*)op)->getOperatorValue().compare("down") == 0)
+    else if (op->getValue().compare("down") == 0)
     {
         numberPos = std::pair<int, int>(blankPos.first + 1, blankPos.second);
     }
-    else if (((EightPuzzleOperator*)op)->getOperatorValue().compare("left") == 0)
+    else if (op->getValue().compare("left") == 0)
     {
         numberPos = std::pair<int, int>(blankPos.first, blankPos.second - 1);
     }
-    else if (((EightPuzzleOperator*)op)->getOperatorValue().compare("right") == 0)
+    else if (op->getValue().compare("right") == 0)
     {
         numberPos = std::pair<int, int>(blankPos.first, blankPos.second + 1);
     }
@@ -160,11 +138,11 @@ Id* EightPuzzle::EightPuzzleState::applyOperator(Operator* op)
     std::string letter1 = "";
     std::string letter2 = "";
 
-    letter1 += ((EightPuzzleId*)getId())->getIdValue().at(numberPos.first * 3 + numberPos.second);
-    letter2 += ((EightPuzzleId*)getId())->getIdValue().at(blankPos.first * 3 + blankPos.second);
+    letter1 += getId().at(numberPos.first * 3 + numberPos.second);
+    letter2 += getId().at(blankPos.first * 3 + blankPos.second);
 
     newId.replace(blankPos.first * 3 + blankPos.second, 1, letter1.c_str());
     newId.replace(numberPos.first * 3 + numberPos.second, 1, letter2.c_str());
 
-    return new EightPuzzleId(newId);
+    return newId;
 }

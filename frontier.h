@@ -1,32 +1,51 @@
 #pragma once
 
-#include <vector>
-#include <functional>
-#include <algorithm>
-#include <object.h>
-#include <iostream>
+#include <state.h>
 
 namespace AI_Search {
 
-class State;
-
+template <typename T>
 class Frontier
 {
 protected:
-    std::vector<State*> _states;
-    std::vector<State*> _visitedStates;
-    std::function<bool(State*, State*)> _sortAlgorithm;
+    std::vector<State<T>*> _states;
 public:
-    Frontier(State* initialState, std::function<bool(State*, State*)> sortAlgorithm);
-    virtual ~Frontier();
+    Frontier(State<T>* initialState)
+    {
+        _states.push_back(initialState);
+    }
+    virtual ~Frontier()
+    {
+    }
 
-    std::function<bool(State*, State*)> getSortAlgorithm() const;
+    virtual void sort() = 0;
 
-    virtual void addStates(std::vector<State*> states);
-    void removeFirst();
-    void clearStates();
-    std::vector<State*> getStates() const;
-    std::vector<State*> getVisitedStates() const;
+    bool isEmpty() const
+    {
+        return _states.empty();
+    }
+
+    virtual State<T>* getFirstState()
+    {
+        State<T>* output = _states.at(0);
+        _states.erase(_states.begin());
+        return output;
+    }
+
+    virtual void addStates(std::vector<State<T>*> states)
+    {
+        _states.insert(_states.end(), states.begin(), states.end());
+        sort();
+    }
+
+    virtual void clear()
+    {
+        int size = _states.size();
+        for (int var = 0; var < size; ++var) {
+            delete _states.at(var);
+        }
+        _states.clear();
+    }
 };
 
 }

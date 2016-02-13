@@ -1,22 +1,20 @@
 #pragma once
 
 #include <operator.h>
-#include <string>
-#include <iostream>
 
 namespace EightPuzzle {
 
-class EightPuzzleOperator : public AI_Search::Operator
+class EightPuzzleOperator : public AI_Search::Operator<std::string>
 {
     std::string _value;
 public:
-    EightPuzzleOperator(std::string value);
+    EightPuzzleOperator(AI_Search::State<std::string>* startState, std::string value);
     virtual ~EightPuzzleOperator();
 
     std::string toString();
     bool equal(Object *other);
 
-    std::string getOperatorValue() const;
+    std::string getValue() const;
 };
 
 }

@@ -1,38 +1,41 @@
-#include <iostream>
-#include <eightpuzzlestate.h>
+#include <EightPuzzle/eightpuzzlestate.h>
 #include <solver.h>
-#include <iterativesolver.h>
-#include <searchalgorithms.h>
+#include <bfs.h>
+#include <astar.h>
 
 using namespace AI_Search;
 using namespace EightPuzzle;
 
-int main(int argc, char* argv[])
+void EightPuzzleProblem()
 {
     //6x3128745
     //4623187x5
     //123456x78
-    State* initialState = new EightPuzzleState(new EightPuzzleId("6x3128745"), nullptr, new EightPuzzleOperator(""), 0, 0);
-    Solver* solver;
+    State<std::string>* initialState = new EightPuzzleState("4623187x5", nullptr, new EightPuzzleOperator(nullptr, ""), 0, 0);
+    State<std::string>* finalState = new EightPuzzleState("12345678x", nullptr, new EightPuzzleOperator(nullptr, ""), 0, 0);
+    Solver<std::string>* solver = new Solver<std::string>(initialState, finalState, new AStar<std::string>(initialState), true, false);
 
-    //solver = new IterativeSolver(initialState, DFS_Algorithm, 15, true, false);
-    solver = new Solver(initialState, AStar, true, false);
+    solver->solve();
+    std::vector<Operator<std::string>*> traceOfOperator = solver->getTraceOfOperators();
 
-    std::vector<Operator*> listOperator = solver->solve();
-
-    if (listOperator.size() != 0)
+    if (traceOfOperator.size() != 0)
     {
-        std::cout << "Initial State: " << ((EightPuzzleId*)solver->getInitialState()->getId())->getIdValue() << std::endl;
-        std::cout << "Final State: " << ((EightPuzzleId*)solver->getFinalState()->getId())->getIdValue() << std::endl;
+        std::cout << "Initial State: " << solver->getInitialState()->getId() << std::endl;
+        std::cout << "Final State: " << solver->getFinalState()->getId() << std::endl;
 
         std::cout << "--List of Operators--" << std::endl;
-        for (Operator* op : listOperator)
+        for (Operator<std::string>* op : traceOfOperator)
         {
-            std::cout << ((EightPuzzleOperator*)op)->getOperatorValue() << std::endl;
+            std::cout << dynamic_cast<EightPuzzleOperator*>(op)->getValue() << std::endl;
         }
     }
     else
     {
         std::cout << "--No Solution--" << std::endl;
     }
+}
+
+int main(int argc, char* argv[])
+{
+    EightPuzzleProblem();
 }
