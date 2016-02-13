@@ -2,6 +2,7 @@
 #include <solver.h>
 #include <bfs.h>
 #include <astar.h>
+#include <iterativedfs.h>
 
 using namespace AI_Search;
 using namespace EightPuzzle;
@@ -13,7 +14,7 @@ void EightPuzzleProblem()
     //123456x78
     State<std::string>* initialState = new EightPuzzleState("4623187x5", nullptr, new EightPuzzleOperator(nullptr, ""), 0, 0);
     State<std::string>* finalState = new EightPuzzleState("12345678x", nullptr, new EightPuzzleOperator(nullptr, ""), 0, 0);
-    Solver<std::string>* solver = new Solver<std::string>(initialState, finalState, new AStar<std::string>(initialState), true, false);
+    Solver<std::string>* solver = new Solver<std::string>(initialState, finalState, new IterativeDFS<std::string>(initialState, 15), true, false);
 
     solver->solve();
     std::vector<Operator<std::string>*> traceOfOperator = solver->getTraceOfOperators();

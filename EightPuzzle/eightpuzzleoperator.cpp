@@ -1,6 +1,6 @@
 #include "eightpuzzleoperator.h"
 
-EightPuzzle::EightPuzzleOperator::EightPuzzleOperator(AI_Search::State<std::string>* startState, std::string value)
+EightPuzzle::EightPuzzleOperator::EightPuzzleOperator(State<std::string>* startState, std::string value)
     : Operator<std::string>(startState), _value(value)
 {
 }
