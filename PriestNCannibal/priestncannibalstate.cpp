@@ -16,6 +16,13 @@ std::string PriestNCannibalState::toString()
 
 std::vector<Operator<PriestNCannibalId*>*> PriestNCannibalState::getAllowedOperators()
 {
+    std::vector<Operator<PriestNCannibalId*>*> output;
+
+    for (int i = 0; i <= 2; ++i) {
+        output.push_back(new PriestNCannibalOperator(this, i, 2 - i, true));
+        output.push_back(new PriestNCannibalOperator(this, i, 2 - i, false));
+    }
+
 
 }
 
