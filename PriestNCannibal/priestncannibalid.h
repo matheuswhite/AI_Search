@@ -4,14 +4,18 @@
 
 class PriestNCannibalId : public Object
 {
-    int _startMarginAmount;
-    int _goalMarginAmount;
+    int _startPriestAmount;
+    int _startCannibalAmount;
+    int _goalPriestAmount;
+    int _goalCannibalAmount;
 public:
-    PriestNCannibalId(int startMarginAmount, int goalMarginAmount);
+    PriestNCannibalId(int startPriestAmount, int startCannibalAmount, int goalPriestAmount, int goalCannibalAmount);
     virtual ~PriestNCannibalId();
 
-    int getStartMarginAmount() const;
-    int getGoalMarginAmount() const;
+    int getStartPriestAmount() const;
+    int getGoalPriestAmount() const;
+    int getStartCannibalAmount() const;
+    int getGoalCannibalAmount() const;
 
     std::string toString();
     bool equal(Object* other);

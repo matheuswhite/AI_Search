@@ -1,7 +1,7 @@
 #include "priestncannibalid.h"
 
-PriestNCannibalId::PriestNCannibalId(int startMarginAmount, int goalMarginAmount)
-    : _startMarginAmount(startMarginAmount), _goalMarginAmount(goalMarginAmount)
+PriestNCannibalId::PriestNCannibalId(int startPriestAmount, int startCannibalAmount, int goalPriestAmount, int goalCannibalAmount)
+    : _startPriestAmount(startPriestAmount), _goalPriestAmount(goalPriestAmount), _startCannibalAmount(startCannibalAmount), _goalCannibalAmount(goalCannibalAmount)
 {
 }
 
@@ -11,18 +11,28 @@ PriestNCannibalId::~PriestNCannibalId()
 
 std::string PriestNCannibalId::toString()
 {
-    return "StartMargin: " + std::to_string(_startMarginAmount/10) + " Priests and " + std::to_string(_startMarginAmount%10) + "Cannibals\nGoalMargin: "
-            + std::to_string(_goalMarginAmount/10) + " Priests and " + std::to_string(_goalMarginAmount%10) + "Cannibals";
+    return "StartMargin: " + std::to_string(_startPriestAmount) + " Priests and " + std::to_string(_startCannibalAmount) + "Cannibals\nGoalMargin: "
+            + std::to_string(_goalPriestAmount) + " Priests and " + std::to_string(_goalCannibalAmount) + "Cannibals";
 }
 
-int PriestNCannibalId::getStartMarginAmount() const
+int PriestNCannibalId::getStartPriestAmount() const
 {
-    return _startMarginAmount;
+    return _startPriestAmount;
 }
 
-int PriestNCannibalId::getGoalMarginAmount() const
+int PriestNCannibalId::getGoalPriestAmount() const
 {
-    return _goalMarginAmount;
+    return _goalPriestAmount;
+}
+
+int PriestNCannibalId::getStartCannibalAmount() const
+{
+    return _startCannibalAmount;
+}
+
+int PriestNCannibalId::getGoalCannibalAmount() const
+{
+    return _goalCannibalAmount;
 }
 
 bool PriestNCannibalId::equal(Object* other)
@@ -30,7 +40,8 @@ bool PriestNCannibalId::equal(Object* other)
     PriestNCannibalId* id = dynamic_cast<PriestNCannibalId*>(other);
     if (id != nullptr)
     {
-        return _startMarginAmount == id->getStartMarginAmount() && _goalMarginAmount == id->getGoalMarginAmount();
+        return _startPriestAmount == id->getStartPriestAmount() && _goalPriestAmount == id->getGoalPriestAmount()
+                && _startCannibalAmount == id->getStartCannibalAmount() && _goalCannibalAmount == id->getGoalCannibalAmount();
     }
     return false;
 }

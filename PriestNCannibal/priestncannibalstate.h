@@ -15,5 +15,4 @@ public:
     std::string toString();
     std::vector<Operator<PriestNCannibalId*>*> getAllowedOperators();
     std::vector<State<PriestNCannibalId*>*> genChilds(std::vector<Operator<PriestNCannibalId*>*> allowedOperators);
-    void genHeuristic();
 };
