@@ -62,6 +62,7 @@ public:
             }
 
             _frontier->addStates(firstState->genChilds(firstState->getAllowedOperators()));
+
         }
 
         _frontier->clear();

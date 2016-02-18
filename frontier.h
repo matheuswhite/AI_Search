@@ -9,10 +9,12 @@ class Frontier
 {
 protected:
     std::vector<State<T>*> _states;
+    std::vector<State<T>*> _visitedStates;
 public:
     Frontier(State<T>* initialState)
     {
         _states.push_back(initialState);
+        _visitedStates.push_back(initialState);
     }
     virtual ~Frontier()
     {
@@ -34,7 +36,24 @@ public:
 
     virtual void addStates(std::vector<State<T>*> states)
     {
-        _states.insert(_states.end(), states.begin(), states.end());
+        for (State<T>* state : states)
+        {
+            bool isVisited = false;
+            for (State<T>* visitedState : _visitedStates)
+            {
+                if (state->equal(visitedState))
+                {
+                    isVisited = true;
+                    break;
+                }
+            }
+            if (!isVisited)
+            {
+                _visitedStates.push_back(state);
+                _states.push_back(state);
+            }
+        }
+
         sort();
     }
 

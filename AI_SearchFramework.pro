@@ -18,7 +18,10 @@ TEMPLATE = app
 
 SOURCES += main.cpp \
     EightPuzzle/eightpuzzlestate.cpp \
-    EightPuzzle/eightpuzzleoperator.cpp
+    EightPuzzle/eightpuzzleoperator.cpp \
+    PriestNCannibal/priestncannibalid.cpp \
+    PriestNCannibal/priestncannibalstate.cpp \
+    PriestNCannibal/priestncannibaloperator.cpp
 
 HEADERS += \
     EightPuzzle/eightpuzzlestate.h \
@@ -29,4 +32,9 @@ HEADERS += \
     object.h \
     frontier.h \
     bfs.h \
-    astar.h
+    astar.h \
+    dfs.h \
+    iterativedfs.h \
+    PriestNCannibal/priestncannibalid.h \
+    PriestNCannibal/priestncannibalstate.h \
+    PriestNCannibal/priestncannibaloperator.h
