@@ -11,8 +11,8 @@ PriestNCannibalId::~PriestNCannibalId()
 
 std::string PriestNCannibalId::toString()
 {
-    return "StartMargin: " + std::to_string(_startPriestAmount) + " Priests and " + std::to_string(_startCannibalAmount) + "Cannibals\nGoalMargin: "
-            + std::to_string(_goalPriestAmount) + " Priests and " + std::to_string(_goalCannibalAmount) + "Cannibals";
+    return "\nStartMargin: " + std::to_string(_startPriestAmount) + " Priests and " + std::to_string(_startCannibalAmount) + " Cannibals\nGoalMargin: "
+            + std::to_string(_goalPriestAmount) + " Priests and " + std::to_string(_goalCannibalAmount) + " Cannibals";
 }
 
 int PriestNCannibalId::getStartPriestAmount() const

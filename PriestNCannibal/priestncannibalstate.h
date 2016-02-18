@@ -12,6 +12,7 @@ public:
     PriestNCannibalState(PriestNCannibalId* id, PriestNCannibalState* father, PriestNCannibalOperator* fatherOperator, int depth, double cost);
     virtual ~PriestNCannibalState();
 
+    bool equal(Object* other);
     std::string toString();
     std::vector<Operator<PriestNCannibalId*>*> getAllowedOperators();
     std::vector<State<PriestNCannibalId*>*> genChilds(std::vector<Operator<PriestNCannibalId*>*> allowedOperators);

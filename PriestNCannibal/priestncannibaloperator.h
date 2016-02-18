@@ -19,4 +19,6 @@ public:
     int getPriestAmount() const;
     int getCannibalAmount() const;
     bool isStartToGoal() const;
+
+    std::string toString();
 };

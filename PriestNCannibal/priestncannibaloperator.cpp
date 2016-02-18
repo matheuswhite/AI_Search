@@ -23,3 +23,9 @@ bool PriestNCannibalOperator::isStartToGoal() const
 {
     return _isStartToGoal;
 }
+
+std::string PriestNCannibalOperator::toString()
+{
+    return  std::to_string(_priestAmount) + " Priests and " + std::to_string(_cannibalAmount) + " Cannibals\nFrom "
+            + (_isStartToGoal ? "Start margin" : "Goal margin") + " to " + (_isStartToGoal ? "Goal margin\n" : "Start margin\n");
+}

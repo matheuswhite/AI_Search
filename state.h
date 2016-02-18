@@ -64,7 +64,7 @@ public:
     {
         std::vector<Operator<T>*> output;
         State<T>* father = this;
-        while(father != nullptr)
+        while(father->getFather() != nullptr)
         {
             output.push_back(father->getFatherOperator());
             father = father->getFather();
@@ -74,7 +74,7 @@ public:
         return output;
     }
 
-    bool equal(Object* other)
+    virtual bool equal(Object* other)
     {
         State<T>* s = dynamic_cast<State<T>*>(other);
         if (s != nullptr)
