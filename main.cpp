@@ -10,12 +10,13 @@ using namespace EightPuzzle;
 
 void EightPuzzleProblem()
 {
-    //6x3128745
-    //4623187x5
-    //123456x78
-    State<std::string>* initialState = new EightPuzzleState("4623187x5", nullptr, new EightPuzzleOperator(nullptr, ""), 0, 0);
+    //1624387x5 ok/ok/ok(13)
+    //6x3128745 ok/ok/ok(19)
+    //4623187x5 ok/ok/ok(15)
+    //123456x78 ok/ok/ok
+    State<std::string>* initialState = new EightPuzzleState("1624387x5", nullptr, new EightPuzzleOperator(nullptr, ""), 0, 0);
     State<std::string>* finalState = new EightPuzzleState("12345678x", nullptr, new EightPuzzleOperator(nullptr, ""), 0, 0);
-    Solver<std::string>* solver = new Solver<std::string>(initialState, finalState, new BFS<std::string>(initialState, 15), true, false);
+    Solver<std::string>* solver = new Solver<std::string>(initialState, finalState, new AStar<std::string>(initialState), true, false);
 
     solver->solve();
     std::vector<Operator<std::string>*> traceOfOperator = solver->getTraceOfOperators();
@@ -39,8 +40,10 @@ void EightPuzzleProblem()
 
 void PriestNCannibalProblem()
 {
-    State<PriestNCannibalId*>* initialState = new PriestNCannibalState(new PriestNCannibalId(3,3,0,0), nullptr, new PriestNCannibalOperator(nullptr, 0,0,true), 0, 0);
-    State<PriestNCannibalId*>* finalState = new PriestNCannibalState(new PriestNCannibalId(0,0,3,3), nullptr, new PriestNCannibalOperator(nullptr, 0,0,true), 0, 0);
+    int priest = 3;
+    int cannibal = 3;
+    State<PriestNCannibalId*>* initialState = new PriestNCannibalState(new PriestNCannibalId(priest,cannibal,0,0), nullptr, new PriestNCannibalOperator(nullptr, 0,0,true), 0, 0);
+    State<PriestNCannibalId*>* finalState = new PriestNCannibalState(new PriestNCannibalId(0,0,priest,cannibal), nullptr, new PriestNCannibalOperator(nullptr, 0,0,true), 0, 0);
     Solver<PriestNCannibalId*>* solver = new Solver<PriestNCannibalId*>(initialState, finalState, new BFS<PriestNCannibalId*>(initialState), true, false);
 
     solver->solve();

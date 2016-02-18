@@ -49,12 +49,9 @@ std::vector<Operator<PriestNCannibalId*>*> PriestNCannibalState::getAllowedOpera
     {
         if (isDeleted)
         {
-            //std::cout << var << "|" << size;
             var--;
             size--;
             isDeleted = false;
-            //std::cout << " Deleted - " << var << "|" << size << std::endl;
-            //std::getchar();
         }
         PriestNCannibalOperator* op = dynamic_cast<PriestNCannibalOperator*>(output.at(var));
         spa = getId()->getStartPriestAmount() + op->getPriestAmount() * (op->isStartToGoal() ? -1 : 1);
