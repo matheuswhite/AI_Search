@@ -21,7 +21,10 @@ SOURCES += main.cpp \
     EightPuzzle/eightpuzzleoperator.cpp \
     PriestNCannibal/priestncannibalid.cpp \
     PriestNCannibal/priestncannibalstate.cpp \
-    PriestNCannibal/priestncannibaloperator.cpp
+    PriestNCannibal/priestncannibaloperator.cpp \
+    SubwayParis/subwayparisstate.cpp \
+    SubwayParis/subwayparisoperator.cpp \
+    SubwayParis/subwayparisinfo.cpp
 
 HEADERS += \
     EightPuzzle/eightpuzzlestate.h \
@@ -37,4 +40,7 @@ HEADERS += \
     iterativedfs.h \
     PriestNCannibal/priestncannibalid.h \
     PriestNCannibal/priestncannibalstate.h \
-    PriestNCannibal/priestncannibaloperator.h
+    PriestNCannibal/priestncannibaloperator.h \
+    SubwayParis/subwayparisstate.h \
+    SubwayParis/subwayparisoperator.h \
+    SubwayParis/subwayparisinfo.h
