@@ -9,7 +9,7 @@ class AStar : public Frontier<T>
 {
     static bool aStar(State<T>* first, State<T>* second)
     {
-        return first->getDepth() + first->getHeuristic() < second->getDepth() + second->getHeuristic();
+        return first->getCost() + first->getHeuristic() < second->getCost() + second->getHeuristic();
     }
 
 public:

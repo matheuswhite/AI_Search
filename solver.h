@@ -52,7 +52,7 @@ public:
         {
             State<T>* firstState = _frontier->getFirstState();
 
-            if (_isVerbose) std::cout << "!--" << firstState->toString() << std::endl;
+            if (_isVerbose) std::cout << "!-- " << firstState->toString() << std::endl;
             if (_isStepByStep) std::getchar();
 
             if (firstState->equal(_finalState))
@@ -62,7 +62,6 @@ public:
             }
 
             _frontier->addStates(firstState->genChilds(firstState->getAllowedOperators()));
-
         }
 
         _frontier->clear();
