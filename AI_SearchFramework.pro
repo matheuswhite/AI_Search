@@ -24,7 +24,10 @@ SOURCES += main.cpp \
     PriestNCannibal/priestncannibaloperator.cpp \
     SubwayParis/subwayparisstate.cpp \
     SubwayParis/subwayparisoperator.cpp \
-    SubwayParis/subwayparisinfo.cpp
+    SubwayParis/subwayparisinfo.cpp \
+    TicTacToe/tictactoestate.cpp \
+    TicTacToe/tictactoeid.cpp \
+    TicTacToe/tictactoemain.cpp
 
 HEADERS += \
     EightPuzzle/eightpuzzlestate.h \
@@ -43,4 +46,8 @@ HEADERS += \
     PriestNCannibal/priestncannibaloperator.h \
     SubwayParis/subwayparisstate.h \
     SubwayParis/subwayparisoperator.h \
-    SubwayParis/subwayparisinfo.h
+    SubwayParis/subwayparisinfo.h \
+    minimax.h \
+    minimaxstate.h \
+    TicTacToe/tictactoestate.h \
+    TicTacToe/tictactoeid.h
