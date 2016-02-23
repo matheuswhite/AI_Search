@@ -42,7 +42,7 @@ std::string TicTacToeState::toString()
 
 bool TicTacToeState::isFinal()
 {
-    return getId()->isO_Winner() || getId()->isX_Winner() || getId()->isFull();
+    return (getId()->isO_Winner() || getId()->isX_Winner() || getId()->isFull());
 }
 
 int TicTacToeState::genUtility()
@@ -50,18 +50,15 @@ int TicTacToeState::genUtility()
     TicTacToeId* id = getId();
     int out = 0;
 
-    if (isFinal())
+    if (_myPiece == TIC_TAC_TOE_PIECE::X)
     {
-        if (_myPiece == TIC_TAC_TOE_PIECE::X)
-        {
-            if (id->isX_Winner()) out = 1;
-            else if (id->isO_Winner()) out = -1;
-        }
-        else if (_myPiece == TIC_TAC_TOE_PIECE::O)
-        {
-            if (id->isO_Winner()) out = 1;
-            else if (id->isX_Winner()) out = -1;
-        }
+        if (id->isX_Winner()) out = 1;
+        else if (id->isO_Winner()) out = -1;
+    }
+    else if (_myPiece == TIC_TAC_TOE_PIECE::O)
+    {
+        if (id->isO_Winner()) out = 1;
+        else if (id->isX_Winner()) out = -1;
     }
 
     return out;

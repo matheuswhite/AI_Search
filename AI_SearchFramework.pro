@@ -27,7 +27,8 @@ SOURCES += main.cpp \
     SubwayParis/subwayparisinfo.cpp \
     TicTacToe/tictactoestate.cpp \
     TicTacToe/tictactoeid.cpp \
-    TicTacToe/tictactoemain.cpp
+    TicTacToe/tictactoemain.cpp \
+    TicTacToe/tictactoegame.cpp
 
 HEADERS += \
     EightPuzzle/eightpuzzlestate.h \
@@ -50,4 +51,5 @@ HEADERS += \
     minimax.h \
     minimaxstate.h \
     TicTacToe/tictactoestate.h \
-    TicTacToe/tictactoeid.h
+    TicTacToe/tictactoeid.h \
+    TicTacToe/tictactoegame.h
