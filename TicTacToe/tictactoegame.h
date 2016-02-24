@@ -17,10 +17,10 @@ public:
     virtual ~TicTacToeGame();
 
     void resetGame();
-    bool isGameOver();
-    TicTacToePiece getWinner();
     bool isMoveAllow(int row, int col);
     void playerMove(int row, int col);
     void aiMove();
     std::string getCurrentBoardState();
+
+    MiniMaxState<TicTacToeId*>* getCurrentState() const;
 };

@@ -14,9 +14,8 @@ TicTacToePiece TicTacToeState::getMyPiece() const
     return _myPiece;
 }
 
-std::vector<MiniMaxState<TicTacToeId*>*> TicTacToeState::genSuccessors()
+void TicTacToeState::genSuccessors()
 {
-    std::vector<MiniMaxState<TicTacToeId*>*> successors;
     TicTacToeId* tempId = nullptr;
     TicTacToePiece nextTurnPiece = (getId()->getCurrentTurnPiece() == TIC_TAC_TOE_PIECE::X ? TIC_TAC_TOE_PIECE::O : TIC_TAC_TOE_PIECE::X);
 
@@ -27,12 +26,10 @@ std::vector<MiniMaxState<TicTacToeId*>*> TicTacToeState::genSuccessors()
             if(getId()->getPiece(j, k) == TIC_TAC_TOE_PIECE::NONE)
             {
                 tempId = new TicTacToeId(getId()->setPiece(j, k, getId()->getCurrentTurnPiece()), nextTurnPiece);
-                successors.push_back(new TicTacToeState(_myPiece, tempId, getDepth() + 1));
+                _successors.push_back(new TicTacToeState(_myPiece, tempId, getDepth() + 1));
             }
         }
     }
-
-    return successors;
 }
 
 std::string TicTacToeState::toString()
