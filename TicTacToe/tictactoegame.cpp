@@ -12,19 +12,6 @@ TicTacToeGame::~TicTacToeGame()
 {
 }
 
-bool TicTacToeGame::isGameOver()
-{
-    return _currentState->isFinal();
-}
-
-TicTacToePiece TicTacToeGame::getWinner()
-{
-    TicTacToePiece out = TIC_TAC_TOE_PIECE::NONE;
-    if (_currentState->getId()->isO_Winner()) out = TIC_TAC_TOE_PIECE::O;
-    else if (_currentState->getId()->isX_Winner()) out = TIC_TAC_TOE_PIECE::X;
-    return out;
-}
-
 bool TicTacToeGame::isMoveAllow(int row, int col)
 {
     return _currentState->getId()->getPiece(row, col) == TIC_TAC_TOE_PIECE::NONE;
@@ -64,4 +51,9 @@ void TicTacToeGame::resetGame()
 std::string TicTacToeGame::getCurrentBoardState()
 {
     return _currentState->getId()->toString();
+}
+
+MiniMaxState<TicTacToeId*>* TicTacToeGame::getCurrentState() const
+{
+    return _currentState;
 }

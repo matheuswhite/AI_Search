@@ -27,10 +27,11 @@ class MiniMax
     int valMax(MiniMaxState<T>* state)
     {
         if (isTerminal(state))
-            return state->getUtility();
+            return state->genUtility();
 
         int val = INT_MIN;
-        std::vector<MiniMaxState<T>*> successors = state->genSuccessors();
+        state->genSuccessors();
+        std::vector<MiniMaxState<T>*> successors = state->getSuccessors();
         for (MiniMaxState<T>* s : successors)
         {
             val = max(val, valMin(s));
@@ -42,10 +43,11 @@ class MiniMax
     int valMin(MiniMaxState<T>* state)
     {
         if (isTerminal(state))
-            return state->getUtility();
+            return state->genUtility();
 
         int val = INT_MAX;
-        std::vector<MiniMaxState<T>*> successors = state->genSuccessors();
+        state->genSuccessors();
+        std::vector<MiniMaxState<T>*> successors = state->getSuccessors();
         for (MiniMaxState<T>* s : successors)
         {
             val = min(val, valMax(s));
@@ -70,12 +72,19 @@ class MiniMax
 
     MiniMaxState<T>* findNextState(MiniMaxState<T>* state, int value)
     {
-        std::vector<MiniMaxState<T>*> successors = state->genSuccessors();
+        state->genSuccessors();
+        std::vector<MiniMaxState<T>*> successors = state->getSuccessors();
         for(MiniMaxState<T>* s : successors)
         {
+            std::cout << "U: " << s->getUtility() << " Val: " << value << " P:\n" << s->getId()->toString() << std::endl;
             if (s->getUtility() == value)
+            {
                 return s;
+            }
         }
+
+        std::cout << "Null!" << std::endl;
+        std::getchar();
 
         return nullptr;
     }
@@ -90,6 +99,8 @@ public:
     MiniMaxState<T>* getNextMovment(MiniMaxState<T>* currentState)
     {
         int val = valMax(currentState);
-        return findNextState(currentState, val);
+        MiniMaxState<T>* out = findNextState(currentState, val);
+        out->clearSuccessors();
+        return out;
     }
 };

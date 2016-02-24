@@ -12,7 +12,7 @@ public:
 
     TicTacToePiece getMyPiece() const;
 
-    std::vector<MiniMaxState<TicTacToeId*>*> genSuccessors();
+    void genSuccessors();
 
     std::string toString();
     bool isFinal();

@@ -95,7 +95,7 @@ bool TicTacToeId::equal(Object* other)
 
 bool TicTacToeId::isX_Winner()
 {
-    short xRow[3], xCol[3], xDia1, xDia2;
+    int xRow[3] = {0}, xCol[3] = {0}, xDia1 = 0, xDia2 = 0;
     for (int i = 0; i < 3; ++i)
     {
         for (int j = 0; j < 3; ++j)
@@ -104,13 +104,19 @@ bool TicTacToeId::isX_Winner()
             {
                 xRow[i] += 1;
                 xCol[j] += 1;
-                if (i == 2 && j == 2)
+                if (i == 1 && j == 1)
                 {
                     xDia1 += 1;
                     xDia2 += 1;
                 }
-                if ((i == 0 && j == 0) || (i == 2 && j == 2)) xDia1 += 1;
-                if ((i == 0 && j == 2) || (i == 2 && j == 0)) xDia2 += 1;
+                if ((i == 0 && j == 0) || (i == 2 && j == 2))
+                {
+                    xDia1 += 1;
+                }
+                if ((i == 0 && j == 2) || (i == 2 && j == 0))
+                {
+                    xDia2 += 1;
+                }
             }
         }
     }
@@ -123,7 +129,7 @@ bool TicTacToeId::isX_Winner()
 
 bool TicTacToeId::isO_Winner()
 {
-    short oRow[3], oCol[3], oDia1, oDia2;
+    int oRow[3] = {0}, oCol[3] = {0}, oDia1 = 0, oDia2 = 0;
     for (int i = 0; i < 3; ++i)
     {
         for (int j = 0; j < 3; ++j)
@@ -132,13 +138,19 @@ bool TicTacToeId::isO_Winner()
             {
                 oRow[i] += 1;
                 oCol[j] += 1;
-                if (i == 2 && j == 2)
+                if (i == 1 && j == 1)
                 {
                     oDia1 += 1;
                     oDia2 += 1;
                 }
-                if ((i == 0 && j == 0) || (i == 2 && j == 2)) oDia1 += 1;
-                if ((i == 0 && j == 2) || (i == 2 && j == 0)) oDia2 += 1;
+                if ((i == 0 && j == 0) || (i == 2 && j == 2))
+                {
+                    oDia1 += 1;
+                }
+                if ((i == 0 && j == 2) || (i == 2 && j == 0))
+                {
+                    oDia2 += 1;
+                }
             }
         }
     }

@@ -9,6 +9,8 @@ class MiniMaxState : public Object
     T _id;
     int _depth;
     int _utility;
+protected:
+    std::vector<MiniMaxState<T>*> _successors;
 public:
     MiniMaxState(T id, int depth) : _id(id), _depth(depth)
     {
@@ -38,9 +40,19 @@ public:
         return _depth;
     }
 
+    std::vector<MiniMaxState<T>*> getSuccessors() const
+    {
+        return _successors;
+    }
+
+    void clearSuccessors()
+    {
+        _successors.clear();
+    }
+
     virtual std::string toString() = 0;
     virtual bool isFinal() = 0;
-    virtual std::vector<MiniMaxState<T>*> genSuccessors() = 0;
+    virtual void genSuccessors() = 0;
 
     virtual int genUtility()
     {

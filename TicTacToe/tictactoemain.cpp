@@ -18,10 +18,10 @@ int main(int argc, char* argv[])
 
     showCommandsAllowed();
 
+    std::cout << game->getCurrentBoardState();
+
     while (!exit)
     {
-        std::cout << game->getCurrentBoardState();
-
         std::cout << "$ ";
         std::getline(std::cin, input);
 
@@ -34,7 +34,13 @@ int main(int argc, char* argv[])
             if (game->isMoveAllow(row, col))
             {
                 game->playerMove(row, col);
-                game->aiMove();
+                std::cout << game->getCurrentBoardState();
+
+                if (!game->getCurrentState()->isFinal())
+                    game->aiMove();
+
+                if (game->getCurrentState() != nullptr)
+                    std::cout << game->getCurrentBoardState();
             }
             else
             {
@@ -44,21 +50,25 @@ int main(int argc, char* argv[])
         else if (input.compare("exit") == 0)
             exit = true;
         else if (input.compare("reset") == 0)
+        {
                 game->resetGame();
+                std::cout << game->getCurrentBoardState();
+        }
         else
         {
             showErrorMsg();
             showCommandsAllowed();
         }
 
-        if (game->isGameOver() && !exit)
+        if (game->getCurrentState()->isFinal() && !exit)
         {
-            std::string msg;
-            if (game->getWinner() == TIC_TAC_TOE_PIECE::X) msg = "You win!";
-            else if (game->getWinner() == TIC_TAC_TOE_PIECE::O) msg = "You lose!";
-            else if (game->getWinner() == TIC_TAC_TOE_PIECE::NONE) msg = "Draw!";
+            std::string msg = "init";
+            if (game->getCurrentState()->getId()->isX_Winner()) msg = "You win!";
+            else if (game->getCurrentState()->getId()->isO_Winner()) msg = "You lose!";
+            else if (game->getCurrentState()->getId()->isFull()) msg = "Draw!";
             std::cout << msg << std::endl;
             game->resetGame();
+            std::cout << game->getCurrentBoardState();
         }
     }
 }
