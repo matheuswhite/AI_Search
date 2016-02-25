@@ -72,19 +72,14 @@ class MiniMax
 
     MiniMaxState<T>* findNextState(MiniMaxState<T>* state, int value)
     {
-        state->genSuccessors();
         std::vector<MiniMaxState<T>*> successors = state->getSuccessors();
         for(MiniMaxState<T>* s : successors)
         {
-            std::cout << "U: " << s->getUtility() << " Val: " << value << " P:\n" << s->getId()->toString() << std::endl;
             if (s->getUtility() == value)
             {
                 return s;
             }
         }
-
-        std::cout << "Null!" << std::endl;
-        std::getchar();
 
         return nullptr;
     }
@@ -100,7 +95,6 @@ public:
     {
         int val = valMax(currentState);
         MiniMaxState<T>* out = findNextState(currentState, val);
-        out->clearSuccessors();
         return out;
     }
 };

@@ -45,11 +45,6 @@ public:
         return _successors;
     }
 
-    void clearSuccessors()
-    {
-        _successors.clear();
-    }
-
     virtual std::string toString() = 0;
     virtual bool isFinal() = 0;
     virtual void genSuccessors() = 0;

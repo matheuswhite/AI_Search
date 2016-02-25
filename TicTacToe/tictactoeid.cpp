@@ -49,12 +49,13 @@ TicTacToePiece** TicTacToeId::setPiece(int row, int col, TicTacToePiece piece)
     }
     for (int i = 0; i < 3; ++i) {
         for (int j = 0; j < 3; ++j) {
-            if (i == row && j == col && board[i][j] == TIC_TAC_TOE_PIECE::NONE)
-                board[i][j] = piece;
-            else
-                board[i][j] = _board[i][j];
+            board[i][j] = _board[i][j];
         }
     }
+
+    if (board[row][col] == TIC_TAC_TOE_PIECE::NONE)
+        board[row][col] = piece;
+
     return board;
 }
 
@@ -121,10 +122,9 @@ bool TicTacToeId::isX_Winner()
         }
     }
 
-    bool out = (xRow[0] == 3) || (xRow[1] == 3) || (xRow[2] == 3)
-            || (xCol[0] == 3) || (xCol[1] == 3) || (xCol[2] == 3)
-            || (xDia1 == 3) || (xDia2 == 3);
-    return out;
+    return xRow[0] == 3 || xRow[1] == 3 || xRow[2] == 3
+            || xCol[0] == 3 || xCol[1] == 3 || xCol[2] == 3
+            || xDia1 == 3 || xDia2 == 3;
 }
 
 bool TicTacToeId::isO_Winner()
@@ -155,10 +155,9 @@ bool TicTacToeId::isO_Winner()
         }
     }
 
-    bool out = (oRow[0] == 3) || (oRow[1] == 3) || (oRow[2] == 3)
-            || (oCol[0] == 3) || (oCol[1] == 3) || (oCol[2] == 3)
-            || (oDia1 == 3) || (oDia2 == 3);
-    return out;
+    return oRow[0] == 3 || oRow[1] == 3 || oRow[2] == 3
+            || oCol[0] == 3 || oCol[1] == 3 || oCol[2] == 3
+            || oDia1 == 3 || oDia2 == 3;
 }
 
 bool TicTacToeId::isFull()
