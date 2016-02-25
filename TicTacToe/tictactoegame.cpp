@@ -2,7 +2,7 @@
 
 TicTacToeGame::TicTacToeGame(TicTacToePiece playerPiece) : _playerPiece(playerPiece)
 {
-    _aiPiece = (_playerPiece == TIC_TAC_TOE_PIECE::X) ? TIC_TAC_TOE_PIECE::O : TIC_TAC_TOE_PIECE::X;
+    _aiPiece = (playerPiece == TIC_TAC_TOE_PIECE::X) ? TIC_TAC_TOE_PIECE::O : TIC_TAC_TOE_PIECE::X;
 
     initializeBoard();
     resetGame();
