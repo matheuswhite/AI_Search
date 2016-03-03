@@ -16,19 +16,18 @@ CONFIG   -= app_bundle
 TEMPLATE = app
 
 
-SOURCES += main.cpp \
+SOURCES += \
     EightPuzzle/eightpuzzlestate.cpp \
     EightPuzzle/eightpuzzleoperator.cpp \
-    PriestNCannibal/priestncannibalid.cpp \
-    PriestNCannibal/priestncannibalstate.cpp \
-    PriestNCannibal/priestncannibaloperator.cpp \
     SubwayParis/subwayparisstate.cpp \
     SubwayParis/subwayparisoperator.cpp \
     SubwayParis/subwayparisinfo.cpp \
     TicTacToe/tictactoestate.cpp \
     TicTacToe/tictactoeid.cpp \
     TicTacToe/tictactoemain.cpp \
-    TicTacToe/tictactoegame.cpp
+    TicTacToe/tictactoegame.cpp \
+    EightPuzzle/eightpuzzlemain.cpp \
+    SubwayParis/subwayparismain.cpp
 
 HEADERS += \
     EightPuzzle/eightpuzzlestate.h \
@@ -42,9 +41,6 @@ HEADERS += \
     astar.h \
     dfs.h \
     iterativedfs.h \
-    PriestNCannibal/priestncannibalid.h \
-    PriestNCannibal/priestncannibalstate.h \
-    PriestNCannibal/priestncannibaloperator.h \
     SubwayParis/subwayparisstate.h \
     SubwayParis/subwayparisoperator.h \
     SubwayParis/subwayparisinfo.h \
