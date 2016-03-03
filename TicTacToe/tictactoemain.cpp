@@ -10,7 +10,7 @@ void showCommandsAllowed()
     std::cout << "Commands Allowed:\n$ [row] [col]\n$ exit\n$ reset\n\n";
 }
 
-int main(int argc, char* argv[])
+int main3(int argc, char* argv[])
 {
     bool exit = false;
     std::string input = "";
@@ -21,7 +21,7 @@ int main(int argc, char* argv[])
     std::cout << game->getCurrentBoardState();
 
     while (!exit)
-    {
+    {   
         std::cout << "$ ";
         std::getline(std::cin, input);
 
@@ -71,4 +71,6 @@ int main(int argc, char* argv[])
             std::cout << game->getCurrentBoardState();
         }
     }
+
+    return 0;
 }

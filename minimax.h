@@ -2,6 +2,7 @@
 
 #include <climits>
 #include <minimaxstate.h>
+#include <algorithm>
 
 template <typename T>
 class MiniMax
@@ -73,15 +74,17 @@ class MiniMax
     MiniMaxState<T>* findNextState(MiniMaxState<T>* state, int value)
     {
         std::vector<MiniMaxState<T>*> successors = state->getSuccessors();
+        MiniMaxState<T>* out = nullptr;
+
         for(MiniMaxState<T>* s : successors)
         {
             if (s->getUtility() == value)
             {
-                return s;
+                out = s;
             }
         }
 
-        return nullptr;
+        return out;
     }
 public:
     MiniMax(int limit) : _limit(limit)
